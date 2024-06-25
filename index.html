@@ -56,16 +56,26 @@
             text-decoration: none;
             color: inherit;
         }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
     <nav>
         <a href="/">windowsemu.github.io</a>
     </nav>
-    <center>
-        <p>Play Windows Games free in your browser</p>
-    </center>
+    <br>
     <div id="gameslist"></div>
+    <footer>
+        &copy; 2024 Windows EMU Games. All games and content on this site are provided for historical and educational purposes only. All trademarks, logos, and images are the property of their respective owners.
+    </footer>
     <script>
     (async function(){
         const r = await fetch("games.json")
