@@ -1,127 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows EMU games</title>
+    <script src="/libv86.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        #gameslist {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-            gap: 20px;
-        }
-        .gameitem {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            width: 200px;
-            text-align: center;
-            height: 300px;
-        }
-        .gameitem .gametitle {
-            padding: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-        }
-        .gameitem:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        .gameitem a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-        #game-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #fff;
-            border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
-        }
-        .centre {
-            justify-content: center;
-            align-items: center;
-            display: flex;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav {
+        background-color: #333;
+        color: white;
+        padding: 15px;
+        text-align: center;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      #gameslist {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        gap: 20px;
+      }
+
+      .gameitem {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        width: 200px;
+        text-align: center;
+        height: 300px;
+      }
+
+      .gameitem .gametitle {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .gameitem:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .gameitem a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      #screen_container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        height: 600px;
+      }
+
+      .centre {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
-        <a href="/">windowsemu.github.io</a>
+      <a href="/">windowsemu.github.io</a>
     </nav>
     <br>
-    <div id="game-container">
-        <iframe id="gameframe" src="" width="800" height="600"></iframe>
-    </div>
-    <a id="fullscreen" href="" class="centre">Fullscreen Version</a>
+    <center>
+      <p id="loadingtxt">-</p>
+      <progress id="progressBar"></progress>
+      <div id=screen_container>
+        <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+        <canvas style="display: none"></canvas>
+      </div>
+      <script>
+        const screenContainer = document.getElementById('screen_container');
+        screenContainer.addEventListener('click', function() {
+          lockPointer();
+        });
+
+        function lockPointer() {
+          screenContainer.requestPointerLock().then(() => {
+            console.log('Pointer locked to screen_container');
+            document.documentElement.style.pointerEvents = 'none';
+            document.addEventListener('pointerlockchange', pointerLockChange);
+          }).catch((err) => {
+            console.error('Failed to lock pointer:', err);
+            document.documentElement.style.pointerEvents = 'auto';
+          });
+        }
+
+        function pointerLockChange() {
+          if (document.pointerLockElement === screenContainer) {
+            console.log('Pointer locked to screen_container');
+          } else {
+            document.documentElement.style.pointerEvents = 'auto';
+            document.removeEventListener('pointerlockchange', pointerLockChange);
+          }
+        }
+      </script>
+    </center>
     <h1 id="gametitle" class="centre"></h1>
     <p id="gamedesc" class="centre"></p>
-    
     <div id="gameslist"></div>
     </div>
-    <footer>
-        &copy; 2024 Windows EMU Games. All games and content on this site are provided for historical and educational purposes only. All trademarks, logos, and images are the property of their respective owners.
-    </footer>    
+    <footer> &copy; 2024 Windows EMU Games. All games and content on this site are provided for historical and educational purposes only. All trademarks, logos, and images are the property of their respective owners. </footer>
     <script>
-        (async function(){
-            const gameid = window.location.search.split("gameid=")[1]
-            if (!gameid) {
-                window.location.href = "/"
-            }
-            document.getElementById("gameframe").src = `games/${gameid}/`
-            document.getElementById("fullscreen").href = `games/${gameid}/`
-            const r = await fetch("games.json")
-            const games = await r.json()
-            let content = ""
-            for (const i of games) {
-                if (i["id"] == gameid) {
-                    document.getElementById("gametitle").textContent = i["name"]
-                    document.getElementById("gamedesc").textContent = i["desc"]
-                    continue
+      (async function() {
+        const gameid = window.location.search.split("gameid=")[1]
+        if (!gameid) {
+          window.location.href = "/"
+        }
+        const r = await fetch("games.json")
+        const games = await r.json()
+        let content = ""
+        for (const i of games) {
+          if (i["id"] == gameid) {
+            document.getElementById("gametitle").textContent = i["name"]
+            document.getElementById("gamedesc").textContent = i["desc"]
+            loadgame(i["state"], i["img"], i["name"])
+            continue
+          }
+          content += `
+					<a href="/play.html?gameid=${i["id"]}">
+						<div class="gameitem">
+							<img width="200" height="240" src="${i["icon"]}">
+								<p class="gametitle">${i["name"]}</p>
+							</div>
+						</a>`
+        }
+        document.getElementById("gameslist").innerHTML = content
+      })();
+      async function fetchWithProgress(url, progressCallback) {
+        const response = await fetch(url, {
+          cache: "force-cache"
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const contentLength = response.headers.get('Content-Length');
+        if (!contentLength) throw new Error('Content-Length response header unavailable');
+        const total = parseInt(contentLength, 10);
+        let loaded = 0;
+        const reader = response.body.getReader();
+        const stream = new ReadableStream({
+          start(controller) {
+            function read() {
+              reader.read().then(({
+                done,
+                value
+              }) => {
+                if (done) {
+                  controller.close();
+                  return;
                 }
-
-            content += `<a href="/play.html?gameid=${i["id"]}"> <div class="gameitem"><img width="200" height="240" src="${i["icon"]}"><p class="gametitle">${i["name"]}</p></div></a>`
+                loaded += value.byteLength;
+                progressCallback(loaded, total);
+                controller.enqueue(value);
+                read();
+              }).catch(error => {
+                console.error(error);
+                controller.error(error);
+              });
             }
-            document.getElementById("gameslist").innerHTML = content
-        })();
-        </script>
-
-
-</body>
+            read();
+          }
+        });
+        return new Response(stream);
+      }
+      async function loadgame(stateurl, drive, gamename) {
+        const loadingtext = document.getElementById("loadingtxt")
+        const progressBar = document.getElementById("progressBar")
+        const progressCallback = (loaded, total) => {
+          loadingtext.textContent = `[1/2] Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
+          progressBar.value = (loaded / total)
+        };
+        const stater = await fetchWithProgress(stateurl, progressCallback)
+        const statres = await stater.blob()
+        const progressCallback2 = (loaded, total) => {
+          loadingtext.textContent = `[2/2] Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
+          progressBar.value = (loaded / total)
+        };
+        const winr = await fetchWithProgress(drive, progressCallback2)
+        const winres = await winr.blob()
+        const blobUrl = URL.createObjectURL(winres);
+        loadingtext.remove()
+        progressBar.remove()
+        const emulator = new V86({
+          wasm_path: "/v86.wasm",
+          bios: {
+            url: "/seabios.bin"
+          },
+          vga_bios: {
+            url: "/vgabios.bin"
+          },
+          hda: {
+            url: blobUrl,
+            size: 2 * 1024 * 1024 * 1024,
+            async: true
+          },
+          memory_size: 512 * 1024 * 1024,
+          screen_container: screen_container,
+          autostart: false,
+        });
+        var filereader = new FileReader();
+        filereader.onload = async function(e) {
+          await emulator.restore_state(e.target.result);
+          emulator.run();
+        };
+        await filereader.readAsArrayBuffer(statres);
+      }
+    </script>
+  </body>
 </html>
