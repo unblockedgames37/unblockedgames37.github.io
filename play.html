@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unblocked Emulator Games</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #gameslist {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+        .gameitem {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 200px;
+            text-align: center;
+            height: 300px;
+        }
+        .gameitem img {
+            width: 100%;
+            height: auto;
+        }
+        .gameitem .gametitle {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .gameitem:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .gameitem a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        #game-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .centre {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">gameemu.github.io</a>
+    </nav>
+
+    <div id="game-container">
+        <iframe id="gameframe" src="" width="800" height="600"></iframe>
+    </div>
+    <h1 id="gametitle" class="centre"></h1>
+    <p id="gamedesc" class="centre"></p>
+    
+    <div id="gameslist"></div>
+    </div>
+    <script>
+        (async function(){
+            const gameid = window.location.search.split("gameid=")[1]
+            if (!gameid) {
+                window.location.href = "/"
+            }
+            document.getElementById("gameframe").src = `games/${gameid}/`
+
+            const r = await fetch("games.json")
+            const games = await r.json()
+            let content = ""
+            for (const i of games) {
+                if (i["id"] == gameid) {
+                    document.getElementById("gametitle").textContent = i["name"]
+                    document.getElementById("gamedesc").textContent = i["desc"]
+                    continue
+                }
+
+                content += `<a href="/play.html?gameid=${i["id"]}"> <div class="gameitem"><img src="${i["icon"]}" alt="Game Title"><p class="gametitle">${i["name"]}</p></div></a>`
+            }
+            document.getElementById("gameslist").innerHTML = content
+        })();
+        </script>
+
+
+</body>
+</html>

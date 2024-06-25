@@ -1,0 +1,178 @@
+<!doctype html>
+<script src="/libv86.js"></script>
+
+
+<style>
+  #screen_container {
+    width: auto !important;
+    height: 100vh !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    width: auto !important;
+    height: 100% !important;
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    transform-origin: top left;
+    background-color: #000;
+    touch-action: none;
+  }
+  body {
+    background-color: #111;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+  }
+</style>
+
+<center>
+    <p id="loadingtxt">-</p>
+    <progress id="progressBar"></progress>
+</center>
+
+<script src="/zesty.js"></script>
+
+<script>
+
+        async function fetchWithProgress(url, progressCallback) {
+            const response = await fetch(url, { cache: "force-cache" });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            const contentLength = response.headers.get('Content-Length');
+            if (!contentLength) throw new Error('Content-Length response header unavailable');
+
+            const total = parseInt(contentLength, 10);
+            let loaded = 0;
+
+            const reader = response.body.getReader();
+            const stream = new ReadableStream({
+                start(controller) {
+                    function read() {
+                        reader.read().then(({ done, value }) => {
+                            if (done) {
+                                controller.close();
+                                return;
+                            }
+
+                            loaded += value.byteLength;
+                            progressCallback(loaded, total);
+                            controller.enqueue(value);
+                            read();
+                        }).catch(error => {
+                            console.error(error);
+                            controller.error(error);
+                        });
+                    }
+
+                    read();
+                }
+            });
+
+            return new Response(stream);
+        }
+
+        function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+
+onload = async function()
+{
+
+
+    const queryString = window.location.search;
+    const cleanQueryString = queryString.startsWith('?') ? queryString.substring(1) : queryString;
+    const paramsArray = cleanQueryString.split('&');
+    const queryParams = {};
+    paramsArray.forEach(param => {
+        const [key, value] = param.split('=');
+        queryParams[key] = decodeURIComponent(value);
+    });
+
+    const stateurl = queryParams["state"]
+
+    const drive = "https://corsproxy.io/?" + queryParams["drive"]
+
+    const gamename = queryParams["name"]
+
+    const loadingtext = document.getElementById("loadingtxt")
+    const progressBar = document.getElementById("progressBar")
+    const progressCallback = (loaded, total) => {
+        loadingtext.textContent = `[1/2] Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
+        progressBar.value = (loaded / total) 
+    };
+
+    const stater = await fetchWithProgress(stateurl, progressCallback)
+    const statres = await stater.blob()
+
+    const progressCallback2 = (loaded, total) => {
+        loadingtext.textContent = `[2/2] Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
+        progressBar.value = (loaded / total) 
+    };
+
+    const winr = await fetchWithProgress(drive, progressCallback2)
+    const winres = await winr.blob()
+    const blobUrl = URL.createObjectURL(winres);
+
+    loadingtext.remove()
+    progressBar.remove()
+
+
+    const emulator = new V86({
+        wasm_path: "/v86.wasm",
+        bios: { url: "/seabios.bin" },
+        vga_bios: { url: "/vgabios.bin" },
+        hda: {
+            url: blobUrl,
+            size: 2 * 1024 * 1024 * 1024,
+            async: true
+        },
+        memory_size: 512 * 1024 * 1024,
+        screen_container: screen_container,
+        autostart: false,
+    });
+
+
+    var filereader = new FileReader();
+
+    filereader.onload = async function(e)
+            {
+            await emulator.restore_state(e.target.result);
+             emulator.run();
+            };
+
+   await filereader.readAsArrayBuffer(statres);
+
+}
+
+</script>
+
+<div id=screen_container>
+    <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+    <canvas style="display: none"></canvas>
+</div>
+
+<script>
+    const screenContainer = document.getElementById('screen_container');
+
+    screenContainer.addEventListener('click', function() {
+        lockPointer();
+    });
+
+    function lockPointer() {
+        screenContainer.requestPointerLock();
+        document.documentElement.style.pointerEvents = 'none';
+        document.addEventListener('pointerlockchange', pointerLockChange);
+    }
+
+    function pointerLockChange() {
+        if (document.pointerLockElement === screenContainer) {
+            console.log('Pointer locked to screen_container');
+        } else {
+            document.documentElement.style.pointerEvents = 'auto';
+        }
+    }
+</script>
