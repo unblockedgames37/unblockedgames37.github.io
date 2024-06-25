@@ -41,10 +41,6 @@
             text-align: center;
             height: 300px;
         }
-        .gameitem img {
-            width: 100%;
-            height: auto;
-        }
         .gameitem .gametitle {
             padding: 10px;
             font-size: 16px;
@@ -84,6 +80,7 @@
     <div id="game-container">
         <iframe id="gameframe" src="" width="800" height="600"></iframe>
     </div>
+    <a id="fullscreen" href="" class="centre">Fullscreen Version</a>
     <h1 id="gametitle" class="centre"></h1>
     <p id="gamedesc" class="centre"></p>
     
@@ -96,7 +93,7 @@
                 window.location.href = "/"
             }
             document.getElementById("gameframe").src = `games/${gameid}/`
-
+            document.getElementById("fullscreen").href = `games/${gameid}/`
             const r = await fetch("games.json")
             const games = await r.json()
             let content = ""
@@ -107,7 +104,7 @@
                     continue
                 }
 
-                content += `<a href="/play.html?gameid=${i["id"]}"> <div class="gameitem"><img src="${i["icon"]}" alt="Game Title"><p class="gametitle">${i["name"]}</p></div></a>`
+            content += `<a href="/play.html?gameid=${i["id"]}"> <div class="gameitem"><img width="200" height="240" src="${i["icon"]}"><p class="gametitle">${i["name"]}</p></div></a>`
             }
             document.getElementById("gameslist").innerHTML = content
         })();

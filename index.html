@@ -41,10 +41,6 @@
             text-align: center;
             height: 300px;
         }
-        .gameitem img {
-            width: 100%;
-            height: auto;
-        }
         .gameitem .gametitle {
             padding: 10px;
             font-size: 16px;
@@ -76,7 +72,7 @@
         const games = await r.json()
         let content = ""
         for (const i of games) {
-            content += `<a href="/play.html?gameid=${i["id"]}"> <div class="gameitem"><img src="${i["icon"]}"><p class="gametitle">${i["name"]}</p></div></a>`
+            content += `<a href="/play.html?gameid=${i["id"]}"> <div class="gameitem"><img width="200" height="240" src="${i["icon"]}"><p class="gametitle">${i["name"]}</p></div></a>`
         }
         document.getElementById("gameslist").innerHTML = content
     })();
