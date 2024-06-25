@@ -161,16 +161,26 @@ onload = async function()
     });
 
     function lockPointer() {
-        screenContainer.requestPointerLock();
-        document.documentElement.style.pointerEvents = 'none';
-        document.addEventListener('pointerlockchange', pointerLockChange);
+        screenContainer.requestPointerLock()
+            .then(() => {
+                console.log('Pointer locked to screen_container');
+                document.documentElement.style.pointerEvents = 'none';
+                document.addEventListener('pointerlockchange', pointerLockChange);
+            })
+            .catch((err) => {
+                console.error('Failed to lock pointer:', err);
+                document.documentElement.style.pointerEvents = 'auto';
+            });
     }
+
 
     function pointerLockChange() {
         if (document.pointerLockElement === screenContainer) {
             console.log('Pointer locked to screen_container');
         } else {
             document.documentElement.style.pointerEvents = 'auto';
+            document.removeEventListener('pointerlockchange', pointerLockChange);
         }
     }
+
 </script>
