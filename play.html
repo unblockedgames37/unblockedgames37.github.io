@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows EMU games</title>
+    <title>Windows Emu</title>
     <script src="/libv86.js"></script>
     <style>
       body {
@@ -91,6 +91,26 @@
         width: 100%;
         bottom: 0;
       }
+      .btn {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #888888;
+      }
+
+      .btn:disabled {
+        background-color: #a5a5a5;
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body>
@@ -105,6 +125,12 @@
         <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
         <canvas style="display: none"></canvas>
       </div>
+      <p id="downloadtext">Idle</p>
+      <br>
+      <button class="btn" id="save">Save</button>
+      <p id="whensave">Loading...</p>
+
+
       <script>
         const screenContainer = document.getElementById('screen_container');
         screenContainer.addEventListener('click', function() {
@@ -113,18 +139,15 @@
 
         function lockPointer() {
           screenContainer.requestPointerLock().then(() => {
-            console.log('Pointer locked to screen_container');
             document.documentElement.style.pointerEvents = 'none';
             document.addEventListener('pointerlockchange', pointerLockChange);
           }).catch((err) => {
-            console.error('Failed to lock pointer:', err);
             document.documentElement.style.pointerEvents = 'auto';
           });
         }
 
         function pointerLockChange() {
           if (document.pointerLockElement === screenContainer) {
-            console.log('Pointer locked to screen_container');
           } else {
             document.documentElement.style.pointerEvents = 'auto';
             document.removeEventListener('pointerlockchange', pointerLockChange);
@@ -138,6 +161,9 @@
     </div>
     <footer> &copy; 2024 Windows EMU Games. All games and content on this site are provided for historical and educational purposes only. All trademarks, logos, and images are the property of their respective owners. </footer>
     <script>
+      function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
       (async function() {
         const gameid = window.location.search.split("gameid=")[1]
         if (!gameid) {
@@ -150,7 +176,7 @@
           if (i["id"] == gameid) {
             document.getElementById("gametitle").textContent = i["name"]
             document.getElementById("gamedesc").textContent = i["desc"]
-            loadgame(i["state"], i["img"], i["name"])
+            loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"])
             continue
           }
           content += `
@@ -198,24 +224,156 @@
         });
         return new Response(stream);
       }
-      async function loadgame(stateurl, drive, gamename) {
+      async function loadgame(stateurl, drive, gamename, disk, ram, chunksize) {
         const loadingtext = document.getElementById("loadingtxt")
         const progressBar = document.getElementById("progressBar")
         const progressCallback = (loaded, total) => {
           loadingtext.textContent = `[1/2] Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
           progressBar.value = (loaded / total)
         };
-        const stater = await fetchWithProgress(stateurl, progressCallback)
-        const statres = await stater.blob()
-        const progressCallback2 = (loaded, total) => {
-          loadingtext.textContent = `[2/2] Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
-          progressBar.value = (loaded / total)
-        };
-        const winr = await fetchWithProgress(drive, progressCallback2)
-        const winres = await winr.blob()
-        const blobUrl = URL.createObjectURL(winres);
+
+        const lastsave = document.getElementById("whensave")
+        const dbName = gamename;
+        const storeName = 'States';
+        let db;
+
+        function loadArrayBuffer() {
+            return new Promise((resolve, reject) => {
+                let transaction = db.transaction([storeName], 'readonly');
+                let objectStore = transaction.objectStore(storeName);
+                let request = objectStore.getAll();
+
+                request.onsuccess = function(event) {
+                    let results = event.target.result;
+                    if (results && results.length > 0) {
+                        resolve(results)
+                    } else {
+                        resolve(false)
+                    }
+                };
+
+                request.onerror = function(event) {
+                    reject('Get error: ' + event.target.errorCode);
+                };
+            });
+        }
+
+        function openDatabase() {
+            return new Promise((resolve, reject) => {
+                let request = indexedDB.open(dbName, 1);
+
+                request.onupgradeneeded = function(event) {
+                    db = event.target.result;
+                    db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: false });
+                };
+
+                request.onsuccess = function(event) {
+                    db = event.target.result;
+                    resolve();
+                };
+
+                request.onerror = function(event) {
+                    reject('Database error: ' + event.target.errorCode);
+                };
+            });
+        }
+
+
+        let statres;
+
+        async function loaddata() {
+          await openDatabase()
+          const lol = await loadArrayBuffer()
+          
+          if (!lol[0]) {
+            lastsave.textContent = "Downloading Game..."
+            const stater = await fetchWithProgress(stateurl, progressCallback)
+            statres = await stater.blob()
+            lastsave.textContent = "Not saved!"
+          } else {
+            const savedtime = lol[0].savetime
+            const state = lol[1].buffer
+            statres = new Blob([state], { type: 'application/octet-stream' });
+            lastsave.textContent = "Saved on " + savedtime
+          }
+
+          
+        }
+        await loaddata()
+
+       
+        function saveArrayBuffer(buffer) {
+            return new Promise((resolve, reject) => {
+                let transaction = db.transaction([storeName], 'readwrite');
+                let objectStore = transaction.objectStore(storeName);
+                let record = { id: 'state', buffer };
+                let request = objectStore.put(record);
+
+                request.onsuccess = function() {
+                    resolve('ArrayBuffer saved successfully');
+                };
+
+                request.onerror = function(event) {
+                    reject('Add error: ' + event.target.errorCode);
+                };
+            });
+        }
+
+        function getCurrentDateTimeString() {
+            const now = new Date();
+
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const day = String(now.getDate()).padStart(2, '0');
+
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const meridiem = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${meridiem}`;
+        }
+
+
+
+
+        console.log(drive)
+
         loadingtext.remove()
         progressBar.remove()
+        window.chunksize = chunksize
+
+        let clientlastsave = 0
+
+        async function savegame(auto) {
+          lastsave.textContent = auto + "Saving..."
+          await openDatabase();
+          const new_state = await emulator.save_state();
+          await saveArrayBuffer(new_state);
+          let transaction = db.transaction([storeName], 'readwrite');
+          let objectStore = transaction.objectStore(storeName);
+          const savetime = getCurrentDateTimeString()
+          let record = { id: 'last', savetime };
+          let request = objectStore.put(record);
+          lastsave.textContent = "Saved!"
+          await delay(1000)
+          lastsave.textContent = "Saved on " + savetime
+
+          clientlastsave = (new Date() + 5000)
+        }
+
+        document.getElementById("save").addEventListener("click", async function() {
+          await savegame("")
+        });
+
+        window.addEventListener("beforeunload", async function(event) {
+            if (new Date() > clientlastsave) {
+              event.preventDefault(); //hasnt saved in last 5 seconds
+            }
+        });
+
+
         const emulator = new V86({
           wasm_path: "/v86.wasm",
           bios: {
@@ -225,20 +383,38 @@
             url: "/vgabios.bin"
           },
           hda: {
-            url: blobUrl,
-            size: 2 * 1024 * 1024 * 1024,
+            url: drive,
+            size: disk * 1024 * 1024 * 1024,
             async: true
           },
-          memory_size: 512 * 1024 * 1024,
+          memory_size: ram * 1024 * 1024,
           screen_container: screen_container,
           autostart: false,
         });
         var filereader = new FileReader();
         filereader.onload = async function(e) {
-          await emulator.restore_state(e.target.result);
-          emulator.run();
+          while (true) {
+            try {
+              await emulator.restore_state(e.target.result);
+              emulator.run();
+              break
+            } catch(err) {
+              console.log("retrying!")
+              await delay(100)
+            }
+          }
+
+
         };
         await filereader.readAsArrayBuffer(statres);
+
+        console.log("auto saving ready")
+
+        while (true) { //auto
+          await delay(60000)
+          await savegame("Auto ")
+        }
+
       }
     </script>
   </body>
