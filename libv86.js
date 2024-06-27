@@ -17,8 +17,11 @@
             P = window.devicePixelRatio || 1,
             0 !== P % 1 && (C /= P,
             S /= P));
-            1 !== C && (x.style.width = aa.width * C + "px");
-            1 !== S && (x.style.height = aa.height * S + "px")
+            1 !== C
+            1 !== S
+            //modded!
+            x.style.width = "800px"
+            x.style.height = "600px"
         }
         console.assert(a, "1st argument must be a DOM container");
         var e = a.getElementsByTagName("canvas")[0], g = e.getContext("2d", {

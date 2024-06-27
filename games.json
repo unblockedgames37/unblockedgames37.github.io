@@ -1,6 +1,5 @@
 [
     {
-        "id": 2,
         "name": "Age Of Empires",
         "desc": "",
         "icon": "https://cdn.glitch.global/81064332-9633-49aa-9983-ae5ced377d7f/Age_of_Empires_Coverart.jpg",
@@ -21,11 +20,10 @@
         "type": "Strategy"
     },
     {
-        "id": 1,
         "name": "Midtown Madness 2",
         "desc": "",
         "icon": "https://cdn.glitch.global/9d09a7e8-81d0-43f3-8e2b-fea88114b236/Midtown_Madness_2_Coverart.png",
-        "state": "https://cdn.glitch.me/5b544901-6d9b-456b-abab-f54faae1404d/midstate.bin.zst",
+        "state": "https://cdn.glitch.me/e4eb72c7-d339-4628-9a7a-a99205dfe71a/sodfahsf.bin.zst",
         "img": [
             "https://cdn.glitch.me/5b544901-6d9b-456b-abab-f54faae1404d/midtown2.img_1.bin",
             "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_2.bin",
@@ -35,27 +33,6 @@
             "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_6.bin",
             "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_7.bin",
             "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_8.bin"
-        ],
-        "chunksizeMB": 256,
-        "diskGB": 2,
-        "ramMB": 512,
-        "type": "Racing"
-    },
-    {
-        "id": 3,
-        "name": "Midtown Madness",
-        "desc": "",
-        "icon": "https://cdn.glitch.global/17ce26f6-f735-4795-a760-db8d4246cca8/Mm1_boxshot.jpg",
-        "state": "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtownlow.bin.zst",
-        "img": [
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_1.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_2.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_3.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_4.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_5.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_6.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_7.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/win2k.img_8.bin"
         ],
         "chunksizeMB": 256,
         "diskGB": 2,

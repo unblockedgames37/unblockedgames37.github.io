@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Emu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        .contain {
+            text-align: center; /* Align text center within div */
+            max-width: 600px; /* Adjust width as needed */
+            margin: auto; /* Center align horizontally */
+            padding: 20px;
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center items horizontally */
+        }
+        .input-container {
+            display: flex; /* Use flexbox for input and button */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            margin-bottom: 20px; /* Optional: Adjust spacing */
+        }
+.contain input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.btn {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #888888;
+      }
+
+      .btn:disabled {
+        background-color: #a5a5a5;
+        cursor: not-allowed;
+      }
+    </style>
+</head>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/cloud.html">Cloud Saves</a>
+    </nav>
+    <br>
+    <div class="contain">
+        <h1>Cloud Save Settings</h1>
+            <input type="text" id="projectname" placeholder="Enter your glitch project name here">
+
+
+            <p id="scan">🔴 Not Setup</p>
+            <p id="usedstorage">-</p>
+            <progress id="usedstorebar" value="0"></progress>
+            <script>
+                let id = 0
+                async function scanproj() {
+                    id += 1
+                    const thisid = id
+                    const pn = document.getElementById("projectname").value
+                    localStorage.setItem("cloud", pn)
+                    document.getElementById("scan").textContent = `🔄 Pending`
+                    try {
+                        const exist = await fetch(`https://${pn}.glitch.me/`)
+                        const response = await exist.json()
+                        if (id == thisid && response[0] == "windowsemu") {
+                            document.getElementById("scan").textContent = `🟢 Ready`
+                            const usedstorage = response[1]
+                            const usedbar = usedstorage / 199000000
+                            document.getElementById("usedstorebar").value = usedbar
+                            const usedMB = (usedstorage / (1024 * 1024)).toFixed(2);
+                            const percentageUsed = (usedbar * 100).toFixed(2);
+                            document.getElementById("usedstorage").textContent = `Used Storage: ${usedMB}mb/199mb (${percentageUsed}%)`
+                        } else {
+                            document.getElementById("scan").textContent = `🔴 Invalid Project`
+                            document.getElementById("usedstorage").textContent = "-"
+                            document.getElementById("usedstorebar").value = "0"
+                        }
+                    } catch(err) {
+                        console.error(err)
+                        document.getElementById("scan").textContent = `🔴 Invalid Project`
+                        document.getElementById("usedstorage").textContent = `-`
+                        document.getElementById("usedstorebar").value = "0"
+                    }
+
+                };
+                
+
+                document.getElementById("projectname").value  = localStorage.getItem("cloud")
+                
+                document.getElementById("projectname").addEventListener("input", scanproj)
+
+                scanproj()
+            </script>
+        <h2>Step 1</h2>
+        <p>Create glitch account <a href="https://glitch.com/signup" target="_blank">SIGN UP</a></p>
+        <h2>Step 2</h2>
+        <p>Create the project <a href="https://glitch.com/edit/#!/remix/windowsemucloud" target="_blank">CREATE PROJECT</a></p>
+        <h2>Step 3</h2>
+        <p>Enter your glitch project name</p>
+        <img src="https://cdn.glitch.global/3fae3816-c219-417f-a5a5-8d84351fb6fd/Screenshot%202024-06-27%20154842.png">
+        <p>Done. dont share your project name with anyone</p>
+    </div>
+</body>
+</html>
