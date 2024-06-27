@@ -103,6 +103,11 @@
       }
     </style>
   </head>
+  <script>
+      if (localStorage.getItem("cloud")) {
+          fetch(`https://${localStorage.getItem("cloud")}.glitch.me/`)
+      }
+  </script>
   <body>
     <nav>
       <a href="/">Home</a>
@@ -112,9 +117,14 @@
     <center>
       <p id="loadingtxt">-</p>
       <progress id="progressBar"></progress>
+      <br id="fds">
+      <button class="btn" id="esc">Escape Key</button>
+      <button class="btn" id="reboot">Reboot</button>
+      
       <div id=screen_container>
         <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
         <canvas style="display: none"></canvas>
+        <img style="display: none; user-select: none;" id="fixsound" src="https://cdn.glitch.global/e4eb72c7-d339-4628-9a7a-a99205dfe71a/New%20Project%20(4).png">
       </div>
       <p id="downloadtext">Idle</p>
       <br>
@@ -123,7 +133,6 @@
       <progress style="display: none;" id="savingprog" value="0"></progress>
 
       <button style="display: none;" id="save_file">File Save</button>
-      <button style="display: none;" id="reboot">Reboot</button>
 
       <script>
         const screenContainer = document.getElementById('screen_container');
@@ -260,7 +269,7 @@
             lastsave.textContent = "Not saved!"
           } else {
             lastsave.textContent = "Downloading Save..."
-            const stater = await fetchWithProgress(`https://corsproxy.io/?https://${cloudstorage}.glitch.me/load?gamename=${gamename}&nocachefix=${generateUUID()}`, progressCallback)
+            const stater = await fetchWithProgress(`https://${cloudstorage}.glitch.me/load?gamename=${gamename}&nocachefix=${generateUUID()}`, progressCallback)
             arraycomped = await stater.arrayBuffer()
             const inflatedData = pako.inflate(arraycomped);
             statres = new Blob([inflatedData], { type: 'application/octet-stream' });
@@ -292,6 +301,7 @@
 
         loadingtext.remove()
         progressBar.remove()
+        document.getElementById('fds').remove()
         window.chunksize = chunksize
 
         let clientlastsave = 0
@@ -312,8 +322,15 @@
           savingprogress.value = "0"
           savingprogress.style.display = ""
           await delay(100)
-          const new_state = await emulator.save_state();
+          const new_state = await window.emulator.save_state();
           const compressedData = pako.deflate(new_state).buffer;
+
+          const bufferLength = compressedData.byteLength
+          console.log(bufferLength)
+
+          if (bufferLength > (256 * 1024 * 1024)) {
+            return alert("Sorry!, but your game save takes up more than 256 mb which is the max limit for a single game")
+          }
           
           const xhr = new XMLHttpRequest();
           xhr.open('POST', `https://${cloudstorage}.glitch.me/savegame?gamename=${gamename}&currenttime=${getCurrentDateTimeString()}`, true);
@@ -332,17 +349,23 @@
 
           xhr.onreadystatechange = async function() {
               if (xhr.readyState === XMLHttpRequest.DONE) {
-                  savingprogress.style.display = ""
+                  const back = xhr.response
+                  savingprogress.style.display = "none"
                   savingprogress.value = "0"
+                  if (back == "auth") {
+                    lastsave.innerHTML = "Error"
+                    alert("The auth in .env has expired please visit your glitch dashboard, login again and change your auth in your project, when you have completed that hit save.")
+                  } else {
+                    const as = await fetch(`https://${cloudstorage}.glitch.me/saved?gamename=${gamename}`)
+                    const savetime = await as.text()
 
-                  const as = await fetch(`https://${cloudstorage}.glitch.me/saved?gamename=${gamename}`)
-                  const savetime = await as.text()
+                    lastsave.innerHTML = "Saved!"
+                    await delay(1000)
+                    lastsave.innerHTML = "Saved on " + savetime
 
-                  lastsave.innerHTML = "Saved!"
-                  await delay(1000)
-                  lastsave.innerHTML = "Saved on " + savetime
+                    clientlastsave = (new Date() + 5000)
+                  }
 
-                  clientlastsave = (new Date() + 5000)
                   saving = false
               }
           };
@@ -361,8 +384,12 @@
             }
         });
 
+        document.getElementById("fixsound").style.display = ""
+        document.addEventListener("click", async function() {
+          if (document.getElementById("fixsound")) {
+            document.getElementById("fixsound").remove()
 
-        const emulator = new V86({
+            const emulator = new V86({
           wasm_path: "/v86.wasm",
           bios: {
             url: "/seabios.bin"
@@ -395,13 +422,23 @@
 
         };
         await filereader.readAsArrayBuffer(statres);
+        window.emulator = emulator
+
+
+        document.getElementById("reboot").onclick = async function() {
+            await emulator.restart();
+            this.blur();
+        };
+
+        document.getElementById("esc").onclick = async function() {
+            await emulator.keyboard_send_keys([27]);
+        };
 
 
         //below is for developer to edit existing games quickly
 
         if (window.location.hostname == "localhost") {
           console.log("dev mode on!")
-          document.getElementById("reboot").style.display = ""
           document.getElementById("save_file").style.display = ""
           document.getElementById("save_file").onclick = async function()
             {
@@ -415,15 +452,17 @@
                 this.blur();
             };
 
-            document.getElementById("reboot").onclick = async function()
-            {
-                await emulator.restart();
-                this.blur();
-            };
+
 
 
           
         }
+
+
+          }
+        });
+
+       
 
       }
 

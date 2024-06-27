@@ -38,5 +38,53 @@
         "diskGB": 2,
         "ramMB": 512,
         "type": "Racing"
+    },
+    {
+        "name": "Windows 2000",
+        "desc": "",
+        "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/2kdisk.png",
+        "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windows2kSTATE.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/5b544901-6d9b-456b-abab-f54faae1404d/midtown2.img_1.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_2.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_3.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_4.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_5.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_6.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_7.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_8.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 2,
+        "ramMB": 512,
+        "type": "OS"
+    },
+    {
+        "name": "Windows XP",
+        "desc": "",
+        "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/xpdisk.png",
+        "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windowsxpstate.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_1.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_2.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_3.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_4.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_5.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_6.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_7.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_8.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_9.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_10.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_11.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_12.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_13.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_14.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_15.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_16.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 4,
+        "ramMB": 512,
+        "type": "OS"
     }
 ]

@@ -59,6 +59,11 @@
         }
     </style>
 </head>
+<script>
+    if (localStorage.getItem("cloud")) {
+        fetch(`https://${localStorage.getItem("cloud")}.glitch.me/`)
+    }
+</script>
 <body>
     <nav>
         <a href="/">Home</a>
