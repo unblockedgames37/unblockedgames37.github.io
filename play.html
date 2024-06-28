@@ -128,7 +128,7 @@
       </div>
       <p id="downloadtext">Idle</p>
       <br>
-      <button class="btn" id="save">Cloud Save</button>
+      <button class="btn" id="deletesave">Delete Cloud Save</button>
       <p id="whensave">Loading...</p>
       <progress style="display: none;" id="savingprog" value="0"></progress>
 
@@ -164,6 +164,16 @@
     </div>
     <script src="pako.min.js"></script>
     <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+          });
+      }
+
       function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
@@ -179,7 +189,7 @@
           if (i["name"] == gamename) {
             document.getElementById("gametitle").textContent = i["name"]
             document.getElementById("gamedesc").textContent = i["desc"]
-            loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"])
+            loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"], i["acpi"])
             continue
           }
           content += `
@@ -227,7 +237,7 @@
         });
         return new Response(stream);
       }
-      async function loadgame(stateurl, drive, gamename, disk, ram, chunksize) {
+      async function loadgame(stateurl, drive, gamename, disk, ram, chunksize, isacpi) {
         const loadingtext = document.getElementById("loadingtxt")
         const progressBar = document.getElementById("progressBar")
         const progressCallback = (loaded, total) => {
@@ -246,6 +256,24 @@
                 const v = c === 'x' ? r : (r & 0x3 | 0x8);
                 return v.toString(16);
             });
+        }
+
+
+        document.getElementById("deletesave").onclick = async function() {
+          let cloudstorage = localStorage.getItem("cloud")
+          if (!cloudstorage) {
+            return alert("Cloud saves not setup.")
+          }
+          const c = confirm("are you sure you would like to delete your save.")
+          if (c) {
+            const as = await fetch(`https://${cloudstorage}.glitch.me/delete?gamename=${gamename}`, {method: "POST"})
+            const rs = await as.text()
+            if (rs == "auth") {
+              alert("The auth in .env has expired please visit your glitch dashboard, login again and change your auth in your project, when you have completed that hit save.")
+            } else {
+              lastsave.innerHTML = "Save deleted. you can reload this tab"
+            }
+          }
         }
 
         async function loaddata() {
@@ -304,14 +332,42 @@
         document.getElementById('fds').remove()
         window.chunksize = chunksize
 
+        async function compressDataWithServiceWorker(data) {
+          return new Promise((resolve, reject) => {
+            if (!navigator.serviceWorker.controller) {
+              reject('No active service worker found');
+              return;
+            }
+
+            const messageChannel = new MessageChannel();
+
+            messageChannel.port1.onmessage = (event) => {
+              if (event.data.error) {
+                reject(event.data.error);
+              } else {
+                resolve(event.data.compressedData);
+              }
+            };
+
+            navigator.serviceWorker.controller.postMessage({
+              action: 'compress',
+              data: data
+            }, [messageChannel.port2]);
+          });
+        }
+
+
+
         let clientlastsave = 0
 
         let saving = false
+        
 
         async function savegame() {
-          const cloudstorage = localStorage.getItem("cloud")
+          try {
+            const cloudstorage = localStorage.getItem("cloud")
           if (!cloudstorage) {
-            lastsave.innerHTML = `Please visit <a href="/cloud.html" target="_blank">SETUP CLOUD SAVES</a> to fix`
+            lastsave.innerHTML = `Please visit <a href="/cloud.html" target="_blank">SETUP CLOUD SAVES</a> to start saving your game state to your own cloud for free with unlimited storage`
             return
           }
           if (saving) {
@@ -323,10 +379,10 @@
           savingprogress.style.display = ""
           await delay(100)
           const new_state = await window.emulator.save_state();
-          const compressedData = pako.deflate(new_state).buffer;
-
+          console.log("COMPRESSING ", new_state)
+          const compressedData = await compressDataWithServiceWorker(new_state)
+          console.log("DONE ", compressedData)
           const bufferLength = compressedData.byteLength
-          console.log(bufferLength)
 
           if (bufferLength > (256 * 1024 * 1024)) {
             return alert("Sorry!, but your game save takes up more than 256 mb which is the max limit for a single game")
@@ -372,11 +428,14 @@
           
           
           xhr.send(formData);
+          } catch(err) {
+            saving = false
+            console.log(err)
+            lastsave.innerHTML = "Save Failed!"
+          }
+         
         }
 
-        document.getElementById("save").addEventListener("click", async function() {
-          await savegame()
-        });
 
         window.addEventListener("beforeunload", async function(event) {
             if (new Date() > clientlastsave) {
@@ -405,6 +464,7 @@
           memory_size: ram * 1024 * 1024,
           screen_container: screen_container,
           autostart: false,
+          acpi: isacpi,
         });
         var filereader = new FileReader();
         filereader.onload = async function(e) {
@@ -459,6 +519,12 @@
         }
 
 
+        while (true) {
+          await delay(5000)
+          await savegame()
+        }
+
+        
           }
         });
 
