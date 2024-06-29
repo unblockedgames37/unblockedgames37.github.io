@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows Emu</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/Designer.png">
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/Designer.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #1a1a1a;
             margin: 0;
             padding: 0;
+            color: white;
         }
         nav {
             background-color: #333;
@@ -32,8 +36,8 @@
             gap: 20px;
         }
         .gameitem {
-            background-color: white;
-            border: 1px solid #ddd;
+            background-color: 333;
+            border: 1px solid #333;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -46,7 +50,7 @@
             padding: 10px;
             font-size: 16px;
             font-weight: bold;
-            color: #333;
+            color: white;
         }
         .gameitem:hover {
             transform: translateY(-5px);
@@ -66,8 +70,12 @@
 </script>
 <body>
     <nav>
-        <a href="/">Home</a>
-        <a href="/cloud.html">Cloud Saves</a>
+        <a href="/">
+            <i class="material-icons">sports_esports</i>
+        </a>
+        <a href="/cloud.html">
+            <i class="material-icons">cloud</i>
+        </a>
     </nav>
     <br>
     <div id="gameslist"></div>

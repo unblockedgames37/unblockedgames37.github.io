@@ -21,6 +21,27 @@
         "acpi": false
     },
     {
+        "name": "Plants Vs Zombies",
+        "desc": "",
+        "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvsz.png",
+        "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/PLANTSVSZOMBIES.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_1.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_2.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_3.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_4.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_5.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_6.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_7.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_8.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 4,
+        "ramMB": 512,
+        "type": "Strategy",
+        "acpi": false
+    },
+    {
         "name": "Midtown Madness 2",
         "desc": "",
         "icon": "https://cdn.glitch.global/9d09a7e8-81d0-43f3-8e2b-fea88114b236/Midtown_Madness_2_Coverart.png",
@@ -180,7 +201,7 @@
         ],
         "chunksizeMB": 256,
         "diskGB": 20,
-        "ramMB": 512,
+        "ramMB": 1024,
         "type": "OS",
         "acpi": true
     }
