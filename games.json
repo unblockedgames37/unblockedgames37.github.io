@@ -36,8 +36,8 @@
             "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_8.bin"
         ],
         "chunksizeMB": 256,
-        "diskGB": 4,
-        "ramMB": 512,
+        "diskGB": 2,
+        "ramMB": 2048,
         "type": "Strategy",
         "acpi": false
     },
