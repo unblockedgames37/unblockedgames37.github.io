@@ -8,6 +8,7 @@
     <meta property="og:title" content="Windows Emu">
     <meta property="og:description" content="Explore a Windows emulator in your browser. Play thousands of Windows games for free or run Windows without any downloads required.">
     <meta property="og:image" content="https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/Designer.png">
+    <meta name="keywords" content="Windows emulator, browser games, Windows games, play Windows games online, Windows in browser, free Windows emulator">
     <title>Windows Emu</title>
     <script src="libv86.js"></script>
     <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/Designer.png">
@@ -255,6 +256,7 @@
           if (i["name"] == gamename) {
             document.getElementById("gametitle").textContent = i["name"]
             document.getElementById("gamedesc").innerHTML = i["desc"]
+            document.title = `Windows Emu - ${i["name"]}`
             loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"], i["acpi"])
             continue
           }
