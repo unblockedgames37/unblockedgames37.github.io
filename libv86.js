@@ -11,7 +11,6 @@
             P && (x.style.transform = "");
             var aa = x.getBoundingClientRect();
             P ? x.style.transform = (1 === C ? "" : " scaleX(" + C + ")") + (1 === S ? "" : " scaleY(" + S + ")") : (0 === C % 1 && 0 === S % 1 ? (e.style.imageRendering = "crisp-edges",
-            e.style.imageRendering = "pixelated",
             e.style["-ms-interpolation-mode"] = "nearest-neighbor") : (e.style.imageRendering = "",
             e.style["-ms-interpolation-mode"] = ""),
             P = window.devicePixelRatio || 1,

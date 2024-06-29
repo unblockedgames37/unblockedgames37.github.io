@@ -100,10 +100,42 @@
         background-color: rgb(90, 90, 90)
       }
 
+      #deletesave {
+        background-color: #ff0000;
+      }
+      #deletesave:hover {
+        background-color: rgb(109, 19, 19)
+      }
+
       .btn:disabled {
         background-color: #a5a5a5;
         cursor: not-allowed;
       }
+
+      :fullscreen canvas {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+      
+      :fullscreen nav {
+        display: none !important;
+      }
+
+      :fullscreen #screen_container {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+
+      :fullscreen #top {
+        display: none !important;
+      }
+      :fullscreen #bot {
+        display: none !important;
+      }
+      :fullscreen body {
+        overflow: hidden;
+      }
+      
     </style>
   </head>
   <script>
@@ -120,65 +152,82 @@
           <i class="material-icons">cloud</i>
       </a>
   </nav>
-    <br>
+    
     <center>
-      <p id="loadingtxt">-</p>
-      <progress id="progressBar"></progress>
-      <br id="fds">
-      <button class="btn" id="esc">Escape Key</button>
-      
+      <div id="top">
+        <br>
+        <p id="loadingtxt">-</p>
+        <progress id="progressBar"></progress>
+        <br id="fds">
+        <button class="btn" id="esc">Escape Key</button>
+      </div>
+
       <div id=screen_container>
         <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
         <canvas style="display: none"></canvas>
         <img style="display: none; user-select: none;" id="fixsound" src="https://cdn.glitch.global/e4eb72c7-d339-4628-9a7a-a99205dfe71a/New%20Project%20(4).png">
       </div>
-      <p id="downloadtext">Idle</p>
-      <br>
-      <button class="btn" id="deletesave">Delete Cloud Save</button>
-      <p id="whensave">Loading...</p>
-      <progress style="display: none;" id="savingprog" value="0"></progress>
-      <button style="display: none;" id="save_file">File Save</button>
 
-      <script>
-        const screenContainer = document.getElementById('screen_container');
-        screenContainer.addEventListener('click', function() {
-          lockPointer();
-        });
+      <div id="bot">
+        <p id="downloadtext">Idle</p>
+        <br>
+        <button class="btn" id="save"><i class="material-icons">save</i></button>
+        <button class="btn" id="fullscreen"><i class="material-icons">fullscreen</i></button>
+        <p id="whensave">Loading...</p>
+        <progress style="display: none;" id="savingprog" value="0"></progress>
+        <button style="display: none;" id="save_file">File Save</button>
+      <h1 id="gametitle" class="centre"></h1>
+      <p id="gamedesc" class="centre"></p>
+      <div id="gameslist"></div>
 
-        function lockPointer() {
-          screenContainer.requestPointerLock().then(() => {
-            document.documentElement.style.pointerEvents = 'none';
-            document.addEventListener('pointerlockchange', pointerLockChange);
-          }).catch((err) => {
-            document.documentElement.style.pointerEvents = 'auto';
-          });
-        }
+      <button class="btn" id="deletesave"><i class="material-icons">delete_forever</i><i class="material-icons">cloud</i></button>
+      </div>
 
-        function pointerLockChange() {
-          if (document.pointerLockElement === screenContainer) {
-          } else {
-            document.documentElement.style.pointerEvents = 'auto';
-            document.removeEventListener('pointerlockchange', pointerLockChange);
-          }
-        }
-      </script>
     </center>
-    <h1 id="gametitle" class="centre"></h1>
-    <p id="gamedesc" class="centre"></p>
-    <div id="gameslist"></div>
-    </div>
-    <script src="pako.min.js"></script>
+ 
+      
+
+      
+
+
     <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-          });
+      document.getElementById("fullscreen").onclick = async function() {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+          document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+          document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // Internet Explorer/Edge
+          document.documentElement.msRequestFullscreen();
+        }
+      }
+    </script>
+    <script>
+      const screenContainer = document.getElementById('screen_container');
+      screenContainer.addEventListener('click', function() {
+        lockPointer();
+      });
+
+      function lockPointer() {
+        screenContainer.requestPointerLock().then(() => {
+          document.documentElement.style.pointerEvents = 'none';
+          document.addEventListener('pointerlockchange', pointerLockChange);
+        }).catch((err) => {
+          document.documentElement.style.pointerEvents = 'auto';
+        });
       }
 
+      function pointerLockChange() {
+        if (document.pointerLockElement === screenContainer) {
+        } else {
+          document.documentElement.style.pointerEvents = 'auto';
+          document.removeEventListener('pointerlockchange', pointerLockChange);
+        }
+      }
+    </script>
+    <script src="pako.min.js"></script>
+    <script>
       function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
@@ -380,16 +429,46 @@
             return
           }
           saving = true
-          lastsave.innerHTML = "Getting ready to save..."
+          lastsave.innerHTML = "Getting Ready for save..."
           savingprogress.value = "0"
           savingprogress.style.display = ""
           await delay(100)
           let new_state = await window.emulator.save_state();
           console.log("COMPRESSING ", new_state)
+
+          const registration = await navigator.serviceWorker.register('/service-worker.js');
+          console.log('Service Worker registered with scope:', registration.scope);
+
+          while (true) {
+            if (!navigator.serviceWorker.controller) {
+              await delay(100)
+            } else {
+              break
+            }
+          }
+
+          lastsave.innerHTML = `Compressing... ${Math.round((new_state.byteLength / 1024) / 1024)} mb`
+
           let compressedData = await compressDataWithServiceWorker(new_state)
           console.log("DONE ", compressedData)
           new_state = null
           const bufferLength = compressedData.byteLength
+
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+              registrations.forEach(registration => {
+                registration.unregister().then(success => {
+                  if (success) {
+                    console.log('Service Worker unregistered.');
+                  } else {
+                    console.log('Service Worker unregistration failed.');
+                  }
+                });
+              });
+            });
+          } else {
+            console.log('Service Worker is not supported in this browser.');
+          }
 
           if (bufferLength > (256 * 1024 * 1024)) {
             return alert("Sorry!, but your game save takes up more than 256 mb which is the max limit for a single game")
@@ -447,6 +526,9 @@
         }
 
 
+        document.getElementById("save").onclick = savegame
+
+
         window.addEventListener("beforeunload", async function(event) {
             if (new Date() > clientlastsave) {
               event.preventDefault(); //hasnt saved in last 5 seconds
@@ -500,6 +582,8 @@
             await emulator.keyboard_send_keys([27]);
         };
 
+        
+
 
         //below is for developer to edit existing games quickly
 
@@ -522,12 +606,6 @@
 
 
           
-        }
-
-
-        while (true) {
-          await delay(5000)
-          await savegame()
         }
 
         
