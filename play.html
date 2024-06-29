@@ -135,7 +135,9 @@
       :fullscreen body {
         overflow: hidden;
       }
-      
+      #gamedesc {
+        max-width: 800px;
+      }
     </style>
   </head>
   <script>
@@ -177,7 +179,7 @@
         <progress style="display: none;" id="savingprog" value="0"></progress>
         <button style="display: none;" id="save_file">File Save</button>
       <h1 id="gametitle" class="centre"></h1>
-      <p id="gamedesc" class="centre"></p>
+      <p id="gamedesc" class="centre" style="text-align: left;"></p>
       <div id="gameslist"></div>
 
       <button class="btn" id="deletesave"><i class="material-icons">delete_forever</i><i class="material-icons">cloud</i></button>
@@ -242,7 +244,7 @@
         for (const i of games) {
           if (i["name"] == gamename) {
             document.getElementById("gametitle").textContent = i["name"]
-            document.getElementById("gamedesc").textContent = i["desc"]
+            document.getElementById("gamedesc").innerHTML = i["desc"]
             loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"], i["acpi"])
             continue
           }

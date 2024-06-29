@@ -1,7 +1,7 @@
 [
     {
         "name": "Age Of Empires",
-        "desc": "Classic age of empires! i tried to get age of empires 2 working and got errors on 4 operating systems",
+        "desc": "'Age of Empires' is a real-time strategy game developed by Ensemble Studios and published by Microsoft. It was first released in 1997 for Windows PCs. The game is set in antiquity and allows players to choose from several civilizations and guide them through various ages, from the Stone Age to the Iron Age, while building cities, managing resources, and engaging in warfare. It was praised for its gameplay depth, historical accuracy (to a certain extent), and its innovative blend of resource management and strategic combat. The success of 'Age of Empires' led to the development of a popular series with multiple sequels and expansions.",
         "icon": "https://cdn.glitch.global/81064332-9633-49aa-9983-ae5ced377d7f/Age_of_Empires_Coverart.jpg",
         "state": "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/zesty.zst",
         "img": [
@@ -22,7 +22,7 @@
     },
     {
         "name": "Plants Vs Zombies",
-        "desc": "Slow performance however still playable",
+        "desc": "'Plants vs. Zombies' is a tower defense and strategy video game developed and originally published by PopCap Games for Windows and Mac OS X in 2009. The game became immensely popular and has since been released on multiple platforms, including iOS, Android, and gaming consoles.<br><br>In 'Plants vs. Zombies,' players defend their homes from hordes of zombies by strategically placing a variety of plants with different offensive and defensive capabilities in their gardens. Each plant has unique abilities, such as shooting peas, freezing zombies, or exploding. The game features a humorous and light-hearted tone, with colorful graphics and quirky animations.<br><br>The gameplay involves planning defenses across multiple levels and game modes, including a story mode, mini-games, puzzles, and a survival mode where waves of zombies become increasingly difficult to repel. Players earn sun points to plant more defensive plants by harvesting sunlight or other means, adding an element of resource management to the strategy.<br><br>'Plants vs. Zombies' received critical acclaim for its addictive gameplay, charming design, and strategic depth. It has spawned several sequels and spin-offs, including 'Plants vs. Zombies 2: It's About Time' and 'Plants vs. Zombies: Garden Warfare,' which introduced different genres while retaining the series' unique charm and humor.",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvsz.png",
         "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/PLANTSVSZOMBIES.bin.zst",
         "img": [
@@ -43,7 +43,7 @@
     },
     {
         "name": "Midtown Madness 2",
-        "desc": "Unplayable play if you dare",
+        "desc": "'Midtown Madness 2' is a racing game developed by Angel Studios and published by Microsoft for Windows PCs.<br><br>It was released in 2000 as a sequel to the original 'Midtown Madness' game.<br><br>The game is set in various cities, including London and San Francisco, offering open-world racing gameplay where players can freely explore the urban environments.<br><br>Key features of 'Midtown Madness 2' include:<br><br>1. Open-World Racing: Players can explore large, detailed city environments with a variety of vehicles, including cars, trucks, and buses.<br><br>2. Modes: The game includes several modes such as Blitz, Checkpoint, Circuit, and Cruise, each offering different objectives and challenges.<br><br>3. Multiplayer: It supports multiplayer gaming over LAN or online, allowing players to compete against each other in various racing events.<br><br>4. Customization: Players can customize their vehicles with paint jobs and decals, enhancing both visual appeal and performance.<br><br>5. Realistic Physics: The game features realistic physics, affecting vehicle handling and dynamics based on the terrain and environment.<br><br>6. Expansion: It has received an expansion pack, 'Midtown Madness 2: London Edition,' which adds new vehicles, challenges, and the city of London as a playable location.<br><br>'Midtown Madness 2' was well-received for its expansive city environments, variety of vehicles, and open-ended gameplay. It remains popular among fans of arcade-style racing games and continues to be enjoyed through emulation and fan communities.",
         "icon": "https://cdn.glitch.global/9d09a7e8-81d0-43f3-8e2b-fea88114b236/Midtown_Madness_2_Coverart.png",
         "state": "https://cdn.glitch.me/e4eb72c7-d339-4628-9a7a-a99205dfe71a/sodfahsf.bin.zst",
         "img": [
@@ -64,7 +64,7 @@
     },
     {
         "name": "Windows 2000",
-        "desc": "An operating system from the year 2000",
+        "desc": "Windows 2000 is a significant release of the Microsoft Windows operating system family, following Windows NT 4.0 and preceding Windows XP. It was launched on February 17, 2000, after being released to manufacturing on December 15, 1999.",
         "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/2kdisk.png",
         "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windows2kSTATE.bin.zst",
         "img": [
@@ -85,7 +85,7 @@
     },
     {
         "name": "Windows XP",
-        "desc": "Good old classic windows XP",
+        "desc": "Windows XP is a widely acclaimed operating system developed by Microsoft and released on October 25, 2001. It marked a significant advancement in the Windows line, combining the consumer-friendly features of the Windows 9x series with the stability and performance improvements of the Windows NT platform.",
         "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/xpdisk.png",
         "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windowsxpstate.bin.zst",
         "img": [
@@ -114,7 +114,7 @@
     },
     {
         "name": "Windows Vista",
-        "desc": "Slow but it works if you wait",
+        "desc": "Windows Vista is an operating system developed by Microsoft and released to manufacturing on November 8, 2006, followed by its general availability on January 30, 2007. It was the successor to Windows XP and represented a major overhaul in terms of user interface, security, and system architecture.",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/vista12.png",
         "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/vista.bin.zst",
         "img": [
