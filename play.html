@@ -137,17 +137,7 @@
       <button class="btn" id="deletesave">Delete Cloud Save</button>
       <p id="whensave">Loading...</p>
       <progress style="display: none;" id="savingprog" value="0"></progress>
-
       <button style="display: none;" id="save_file">File Save</button>
-      <p id="cloudname"></p>
-      <script>
-        const c = localStorage.getItem("cloud")
-        if (c) {
-          document.getElementById("cloudname").textContent = `Cloud Save Name: ${localStorage.getItem("cloud")}`
-        } else{
-          document.getElementById("cloudname").textContent = `Its recommended to setup cloud saves.`
-        }
-      </script>
 
       <script>
         const screenContainer = document.getElementById('screen_container');
@@ -313,9 +303,10 @@
           } else {
             lastsave.textContent = "Downloading Save..."
             const stater = await fetchWithProgress(`https://${cloudstorage}.glitch.me/load?gamename=${gamename}&nocachefix=${generateUUID()}`, progressCallback)
-            arraycomped = await stater.arrayBuffer()
+            let arraycomped = await stater.arrayBuffer()
             const inflatedData = pako.inflate(arraycomped);
             statres = new Blob([inflatedData], { type: 'application/octet-stream' });
+            arraycomped = null;
 
             lastsave.textContent = "Saved on " + savedtime
           }
@@ -389,14 +380,15 @@
             return
           }
           saving = true
-          lastsave.innerHTML = "Compressing..."
+          lastsave.innerHTML = "Getting ready to save..."
           savingprogress.value = "0"
           savingprogress.style.display = ""
           await delay(100)
-          const new_state = await window.emulator.save_state();
+          let new_state = await window.emulator.save_state();
           console.log("COMPRESSING ", new_state)
-          const compressedData = await compressDataWithServiceWorker(new_state)
+          let compressedData = await compressDataWithServiceWorker(new_state)
           console.log("DONE ", compressedData)
+          new_state = null
           const bufferLength = compressedData.byteLength
 
           if (bufferLength > (256 * 1024 * 1024)) {
@@ -406,13 +398,14 @@
           const xhr = new XMLHttpRequest();
           xhr.open('POST', `https://${cloudstorage}.glitch.me/savegame?gamename=${gamename}&currenttime=${getCurrentDateTimeString()}`, true);
           const blob = new Blob([compressedData], { type: 'application/octet-stream' });
+          compressedData = null
           console.log(blob)
           let formData = new FormData();
           formData.append('file', blob, 'state.bin');
 
           xhr.upload.addEventListener('progress', function(event) {
               if (event.lengthComputable) {
-                  lastsave.innerHTML = "Saving... " + ((event.loaded / event.total) * 100).toFixed(2) + "%"
+                  lastsave.innerHTML = `Saving ${Math.round((event.total / 1024) / 1024)} mb... ` + ((event.loaded / event.total) * 100).toFixed(2) + "%"
                   savingprogress.value = (event.loaded / event.total)
               }
           });
@@ -437,6 +430,7 @@
                     clientlastsave = (new Date() + 5000)
                   }
 
+                  URL.revokeObjectURL(blob);
                   saving = false
               }
           };
@@ -447,6 +441,7 @@
             saving = false
             console.log(err)
             lastsave.innerHTML = "Save Failed!"
+            URL.revokeObjectURL(blob);
           }
          
         }
@@ -488,6 +483,7 @@
             try {
               await emulator.restore_state(e.target.result);
               emulator.run();
+              statres = null
               break
             } catch(err) {
               console.log("retrying!")

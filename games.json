@@ -1,7 +1,7 @@
 [
     {
         "name": "Age Of Empires",
-        "desc": "",
+        "desc": "Classic age of empires! i tried to get age of empires 2 working and got errors on 4 operating systems",
         "icon": "https://cdn.glitch.global/81064332-9633-49aa-9983-ae5ced377d7f/Age_of_Empires_Coverart.jpg",
         "state": "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/zesty.zst",
         "img": [
@@ -22,7 +22,7 @@
     },
     {
         "name": "Plants Vs Zombies",
-        "desc": "",
+        "desc": "Slow performance however still playable",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvsz.png",
         "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/PLANTSVSZOMBIES.bin.zst",
         "img": [
@@ -43,7 +43,7 @@
     },
     {
         "name": "Midtown Madness 2",
-        "desc": "",
+        "desc": "Unplayable play if you dare",
         "icon": "https://cdn.glitch.global/9d09a7e8-81d0-43f3-8e2b-fea88114b236/Midtown_Madness_2_Coverart.png",
         "state": "https://cdn.glitch.me/e4eb72c7-d339-4628-9a7a-a99205dfe71a/sodfahsf.bin.zst",
         "img": [
@@ -64,7 +64,7 @@
     },
     {
         "name": "Windows 2000",
-        "desc": "",
+        "desc": "An operating system from the year 2000",
         "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/2kdisk.png",
         "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windows2kSTATE.bin.zst",
         "img": [
@@ -85,7 +85,7 @@
     },
     {
         "name": "Windows XP",
-        "desc": "",
+        "desc": "Good old classic windows XP",
         "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/xpdisk.png",
         "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windowsxpstate.bin.zst",
         "img": [
@@ -114,7 +114,7 @@
     },
     {
         "name": "Windows Vista",
-        "desc": "",
+        "desc": "Slow but it works if you wait",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/vista12.png",
         "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/vista.bin.zst",
         "img": [
