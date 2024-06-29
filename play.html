@@ -80,10 +80,11 @@
       }
 
       .centre {
-        justify-content: center;
-        align-items: center;
         display: flex;
+        align-items: center;
+        flex-direction: column;
       }
+
       .btn {
         background-color: #333;
         color: #ffffff;
@@ -155,37 +156,41 @@
       </a>
   </nav>
     
-    <center>
-      <div id="top">
+
+      <div id="top" class="centre">
         <br>
         <p id="loadingtxt">-</p>
         <progress id="progressBar"></progress>
         <br id="fds">
         <button class="btn" id="esc">Escape Key</button>
       </div>
+      <center>
+        <div id="screen_container">
+          <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+          <canvas style="display: none"></canvas>
+          <img style="display: none; user-select: none;" id="fixsound" src="https://cdn.glitch.global/e4eb72c7-d339-4628-9a7a-a99205dfe71a/New%20Project%20(4).png">
+        </div>
+      </center>
+      <div id="bot" class="centre">
 
-      <div id=screen_container>
-        <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
-        <canvas style="display: none"></canvas>
-        <img style="display: none; user-select: none;" id="fixsound" src="https://cdn.glitch.global/e4eb72c7-d339-4628-9a7a-a99205dfe71a/New%20Project%20(4).png">
-      </div>
-
-      <div id="bot">
         <p id="downloadtext">Idle</p>
         <br>
-        <button class="btn" id="save"><i class="material-icons">save</i></button>
-        <button class="btn" id="fullscreen"><i class="material-icons">fullscreen</i></button>
+        <div>
+          <button class="btn" id="save"><i class="material-icons">save</i></button>
+          <button class="btn" id="fullscreen"><i class="material-icons">fullscreen</i></button>
+        </div>
+
         <p id="whensave">Loading...</p>
         <progress style="display: none;" id="savingprog" value="0"></progress>
         <button style="display: none;" id="save_file">File Save</button>
-      <h1 id="gametitle" class="centre"></h1>
-      <p id="gamedesc" class="centre" style="text-align: left;"></p>
+      <h1 id="gametitle"></h1>
+      <p id="gamedesc" style="text-align: left;"></p>
       <div id="gameslist"></div>
 
       <button class="btn" id="deletesave"><i class="material-icons">delete_forever</i><i class="material-icons">cloud</i></button>
       </div>
 
-    </center>
+
  
       
 
