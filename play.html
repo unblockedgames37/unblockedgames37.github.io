@@ -401,31 +401,6 @@
         document.getElementById('fds').remove()
         window.chunksize = chunksize
 
-        async function compressDataWithServiceWorker(data) {
-          return new Promise((resolve, reject) => {
-            if (!navigator.serviceWorker.controller) {
-              reject('No active service worker found');
-              return;
-            }
-
-            const messageChannel = new MessageChannel();
-
-            messageChannel.port1.onmessage = (event) => {
-              if (event.data.error) {
-                reject(event.data.error);
-              } else {
-                resolve(event.data.compressedData);
-              }
-            };
-
-            navigator.serviceWorker.controller.postMessage({
-              action: 'compress',
-              data: data
-            }, [messageChannel.port2]);
-          });
-        }
-
-
 
         let clientlastsave = 0
 
@@ -443,46 +418,19 @@
             return
           }
           saving = true
-          lastsave.innerHTML = "Getting Ready for save..."
+          lastsave.innerHTML = "Getting Ready for save (will freeze for a while depending on size)..."
           savingprogress.value = "0"
           savingprogress.style.display = ""
           await delay(100)
           let new_state = await window.emulator.save_state();
           console.log("COMPRESSING ", new_state)
 
-          const registration = await navigator.serviceWorker.register('/service-worker.js');
-          console.log('Service Worker registered with scope:', registration.scope);
-
-          while (true) {
-            if (!navigator.serviceWorker.controller) {
-              await delay(100)
-            } else {
-              break
-            }
-          }
-
           lastsave.innerHTML = `Compressing... ${Math.round((new_state.byteLength / 1024) / 1024)} mb`
 
-          let compressedData = await compressDataWithServiceWorker(new_state)
+          let compressedData = await pako.deflate(new_state).buffer
           console.log("DONE ", compressedData)
           new_state = null
           const bufferLength = compressedData.byteLength
-
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(registrations => {
-              registrations.forEach(registration => {
-                registration.unregister().then(success => {
-                  if (success) {
-                    console.log('Service Worker unregistered.');
-                  } else {
-                    console.log('Service Worker unregistration failed.');
-                  }
-                });
-              });
-            });
-          } else {
-            console.log('Service Worker is not supported in this browser.');
-          }
 
           if (bufferLength > (256 * 1024 * 1024)) {
             return alert("Sorry!, but your game save takes up more than 256 mb which is the max limit for a single game")
