@@ -1,18 +1,18 @@
 [
     {
-        "name": "Age Of Empires",
-        "desc": "'Age of Empires' is a real-time strategy game developed by Ensemble Studios and published by Microsoft. It was first released in 1997 for Windows PCs. The game is set in antiquity and allows players to choose from several civilizations and guide them through various ages, from the Stone Age to the Iron Age, while building cities, managing resources, and engaging in warfare. It was praised for its gameplay depth, historical accuracy (to a certain extent), and its innovative blend of resource management and strategic combat. The success of 'Age of Empires' led to the development of a popular series with multiple sequels and expansions.",
-        "icon": "https://cdn.glitch.global/81064332-9633-49aa-9983-ae5ced377d7f/Age_of_Empires_Coverart.jpg",
-        "state": "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/zesty.zst",
+        "name": "Age Of Empires II",
+        "desc": "'Age of Empires II,' developed by Ensemble Studios and released in 1999 by Microsoft, is a critically acclaimed real-time strategy game that has stood the test of time. Set in the Middle Ages, it features thirteen playable civilizations, each with unique units and technologies. Players gather resources, build cities, and train armies to conquer opponents, both in single-player campaigns and multiplayer battles. Known for its deep strategic gameplay, historical accuracy, and engaging storylines, the game has seen numerous expansions and a definitive edition released in 2019, further enhancing its graphics and gameplay while introducing new content. Its enduring popularity is a testament to its influential role in the RTS genre.",
+        "icon": "https://cdn.glitch.global/8d99b0f8-3758-4a9b-9925-27d117c1b1f3/Age_of_Empires_II_-_The_Age_of_Kings_Coverart.png",
+        "state": "https://cdn.glitch.me/8d99b0f8-3758-4a9b-9925-27d117c1b1f3/AGEOFEMPIRES2FINALLOADED.bin.zst",
         "img": [
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_1.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_2.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_3.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_4.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_5.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_6.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_7.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_8.bin"
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_1.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_2.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_3.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_4.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_5.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_6.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_7.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_8.bin"
         ],
         "chunksizeMB": 256,
         "diskGB": 2,
@@ -38,6 +38,27 @@
         "chunksizeMB": 256,
         "diskGB": 2,
         "ramMB": 2048,
+        "type": "Strategy",
+        "acpi": false
+    },
+    {
+        "name": "Age Of Empires",
+        "desc": "'Age of Empires' is a real-time strategy game developed by Ensemble Studios and published by Microsoft. It was first released in 1997 for Windows PCs. The game is set in antiquity and allows players to choose from several civilizations and guide them through various ages, from the Stone Age to the Iron Age, while building cities, managing resources, and engaging in warfare. It was praised for its gameplay depth, historical accuracy (to a certain extent), and its innovative blend of resource management and strategic combat. The success of 'Age of Empires' led to the development of a popular series with multiple sequels and expansions.",
+        "icon": "https://cdn.glitch.global/81064332-9633-49aa-9983-ae5ced377d7f/Age_of_Empires_Coverart.jpg",
+        "state": "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/zesty.zst",
+        "img": [
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_1.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_2.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_3.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_4.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_5.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_6.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_7.bin",
+            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_8.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 2,
+        "ramMB": 512,
         "type": "Strategy",
         "acpi": false
     },
