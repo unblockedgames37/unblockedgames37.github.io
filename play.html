@@ -216,29 +216,6 @@
         }
       }
     </script>
-    <script>
-      const screenContainer = document.getElementById('screen_container');
-      screenContainer.addEventListener('click', function() {
-        lockPointer();
-      });
-
-      function lockPointer() {
-        screenContainer.requestPointerLock().then(() => {
-          document.documentElement.style.pointerEvents = 'none';
-          document.addEventListener('pointerlockchange', pointerLockChange);
-        }).catch((err) => {
-          document.documentElement.style.pointerEvents = 'auto';
-        });
-      }
-
-      function pointerLockChange() {
-        if (document.pointerLockElement === screenContainer) {
-        } else {
-          document.documentElement.style.pointerEvents = 'auto';
-          document.removeEventListener('pointerlockchange', pointerLockChange);
-        }
-      }
-    </script>
     <script src="pako.min.js"></script>
     <script>
       function delay(ms) {
@@ -257,7 +234,14 @@
             document.getElementById("gametitle").textContent = i["name"]
             document.getElementById("gamedesc").innerHTML = i["desc"]
             document.title = `Windows Emu - ${i["name"]}`
-            loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"], i["acpi"])
+
+            if (i["iframe"]) {
+              loadiframe(i["iframe"])
+            } else { //must be an emulator game
+              loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"], i["acpi"])
+            }
+
+            
             continue
           }
           content += `
@@ -306,6 +290,30 @@
         return new Response(stream);
       }
       async function loadgame(stateurl, drive, gamename, disk, ram, chunksize, isacpi) {
+
+
+        const screenContainer = document.getElementById('screen_container');
+        screenContainer.addEventListener('click', function() {
+          lockPointer();
+        });
+
+        function lockPointer() {
+          screenContainer.requestPointerLock().then(() => {
+            document.documentElement.style.pointerEvents = 'none';
+            document.addEventListener('pointerlockchange', pointerLockChange);
+          }).catch((err) => {
+            document.documentElement.style.pointerEvents = 'auto';
+          });
+        }
+
+        function pointerLockChange() {
+          if (document.pointerLockElement === screenContainer) {
+          } else {
+            document.documentElement.style.pointerEvents = 'auto';
+            document.removeEventListener('pointerlockchange', pointerLockChange);
+          }
+        }
+
         const loadingtext = document.getElementById("loadingtxt")
         const progressBar = document.getElementById("progressBar")
         const progressCallback = (loaded, total) => {
@@ -579,6 +587,32 @@
       }
 
 
+      async function loadiframe(url) {
+        document.getElementById("top").style.visibility = "hidden"
+        document.getElementById("downloadtext").style.visibility = "hidden"
+        document.getElementById("save").style.display = "none"
+        document.getElementById("whensave").style.visibility = "hidden"
+        const scr = document.getElementById("screen_container")
+        const iframe = document.createElement("iframe")
+        iframe.src = url
+        iframe.style.height = "100%"
+        iframe.style.width = "100%"
+        iframe.style.border = "none";
+
+        iframe.addEventListener('load', function() {
+            const script = document.createElement('script');
+            script.textContent = `
+                window.open = function() {
+                    // Prevent window.open calls
+                    console.log("Opening new window is blocked.");
+                };
+            `;
+            iframe.contentDocument.head.appendChild(script);
+        });
+
+        scr.appendChild(iframe)
+        
+      }
 
 
     </script>
