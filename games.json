@@ -28,7 +28,14 @@
         "iframe": "/g/slope.html"
     },
     {
-        "name": "og 1v1.lol",
+        "name": "Subway Surfers",
+        "desc": "Subway Surfers is an endless runner mobile game co-developed by Kiloo and SYBO Games. It was released on May 24, 2012, and is available on various platforms including iOS, Android, and Windows Phone. In the game, players take on the role of teenage graffiti artists who run through subway tracks to escape from an inspector and his dog. Players must dodge trains and other obstacles while collecting coins and power-ups. The game is known for its colorful, vibrant graphics and frequent updates, which often feature new cities and themes. Subway Surfers has become one of the most downloaded mobile games, consistently maintaining its popularity over the years.",
+        "icon": "https://cdn.glitch.global/0c98aa45-2ec4-4f77-8682-f4bf67f9f6fb/New%20Project.png?v=1719993034235",
+        "type": "Endless",
+        "iframe": "/g/subway.html"
+    },
+    {
+        "name": "Old 1v1.lol",
         "desc": "'1v1.lol' is an online multiplayer shooting and building game known for its fast-paced gameplay and competitive mechanics. Players can engage in 1v1 duels or team up in multiplayer battles, combining shooting and building elements akin to titles like Fortnite. The game allows for strategic construction of walls, ramps, and platforms to enhance defensive tactics or gain positional advantages during combat encounters. Various modes, including 1v1, 2v2, and Party modes, cater to both solo competitive play and cooperative team dynamics. With a range of weapons and items at players' disposal, such as rifles and shotguns, '1v1.lol' offers a dynamic gaming experience where skill, strategy, and quick reflexes are essential for success.",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/New%20Project%20(5).png",
         "type": "Shooter",
@@ -53,48 +60,6 @@
         "diskGB": 2,
         "ramMB": 2048,
         "type": "Strategy",
-        "acpi": false
-    },
-    {
-        "name": "Age Of Empires",
-        "desc": "'Age of Empires' is a real-time strategy game developed by Ensemble Studios and published by Microsoft. It was first released in 1997 for Windows PCs. The game is set in antiquity and allows players to choose from several civilizations and guide them through various ages, from the Stone Age to the Iron Age, while building cities, managing resources, and engaging in warfare. It was praised for its gameplay depth, historical accuracy (to a certain extent), and its innovative blend of resource management and strategic combat. The success of 'Age of Empires' led to the development of a popular series with multiple sequels and expansions.",
-        "icon": "https://cdn.glitch.global/81064332-9633-49aa-9983-ae5ced377d7f/Age_of_Empires_Coverart.jpg",
-        "state": "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/zesty.zst",
-        "img": [
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_1.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_2.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_3.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_4.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_5.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_6.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_7.bin",
-            "https://cdn.glitch.me/df30b638-d06e-49e4-a3ae-d57f89e9aa66/ageofemp.img_8.bin"
-        ],
-        "chunksizeMB": 256,
-        "diskGB": 2,
-        "ramMB": 512,
-        "type": "Strategy",
-        "acpi": false
-    },
-    {
-        "name": "Midtown Madness 2",
-        "desc": "'Midtown Madness 2' is a racing game developed by Angel Studios and published by Microsoft for Windows PCs.<br><br>It was released in 2000 as a sequel to the original 'Midtown Madness' game.<br><br>The game is set in various cities, including London and San Francisco, offering open-world racing gameplay where players can freely explore the urban environments.<br><br>Key features of 'Midtown Madness 2' include:<br><br>1. Open-World Racing: Players can explore large, detailed city environments with a variety of vehicles, including cars, trucks, and buses.<br><br>2. Modes: The game includes several modes such as Blitz, Checkpoint, Circuit, and Cruise, each offering different objectives and challenges.<br><br>3. Multiplayer: It supports multiplayer gaming over LAN or online, allowing players to compete against each other in various racing events.<br><br>4. Customization: Players can customize their vehicles with paint jobs and decals, enhancing both visual appeal and performance.<br><br>5. Realistic Physics: The game features realistic physics, affecting vehicle handling and dynamics based on the terrain and environment.<br><br>6. Expansion: It has received an expansion pack, 'Midtown Madness 2: London Edition,' which adds new vehicles, challenges, and the city of London as a playable location.<br><br>'Midtown Madness 2' was well-received for its expansive city environments, variety of vehicles, and open-ended gameplay. It remains popular among fans of arcade-style racing games and continues to be enjoyed through emulation and fan communities.",
-        "icon": "https://cdn.glitch.global/9d09a7e8-81d0-43f3-8e2b-fea88114b236/Midtown_Madness_2_Coverart.png",
-        "state": "https://cdn.glitch.me/e4eb72c7-d339-4628-9a7a-a99205dfe71a/sodfahsf.bin.zst",
-        "img": [
-            "https://cdn.glitch.me/5b544901-6d9b-456b-abab-f54faae1404d/midtown2.img_1.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_2.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_3.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_4.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_5.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_6.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_7.bin",
-            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_8.bin"
-        ],
-        "chunksizeMB": 256,
-        "diskGB": 2,
-        "ramMB": 512,
-        "type": "Racing",
         "acpi": false
     },
     {
