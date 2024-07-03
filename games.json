@@ -35,13 +35,6 @@
         "iframe": "/g/subway.html"
     },
     {
-        "name": "Old 1v1.lol",
-        "desc": "'1v1.lol' is an online multiplayer shooting and building game known for its fast-paced gameplay and competitive mechanics. Players can engage in 1v1 duels or team up in multiplayer battles, combining shooting and building elements akin to titles like Fortnite. The game allows for strategic construction of walls, ramps, and platforms to enhance defensive tactics or gain positional advantages during combat encounters. Various modes, including 1v1, 2v2, and Party modes, cater to both solo competitive play and cooperative team dynamics. With a range of weapons and items at players' disposal, such as rifles and shotguns, '1v1.lol' offers a dynamic gaming experience where skill, strategy, and quick reflexes are essential for success.",
-        "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/New%20Project%20(5).png",
-        "type": "Shooter",
-        "iframe": "/g/og1v1.html"
-    },
-    {
         "name": "Plants Vs Zombies",
         "desc": "'Plants vs. Zombies' is a tower defense and strategy video game developed and originally published by PopCap Games for Windows and Mac OS X in 2009. The game became immensely popular and has since been released on multiple platforms, including iOS, Android, and gaming consoles.<br><br>In 'Plants vs. Zombies,' players defend their homes from hordes of zombies by strategically placing a variety of plants with different offensive and defensive capabilities in their gardens. Each plant has unique abilities, such as shooting peas, freezing zombies, or exploding. The game features a humorous and light-hearted tone, with colorful graphics and quirky animations.<br><br>The gameplay involves planning defenses across multiple levels and game modes, including a story mode, mini-games, puzzles, and a survival mode where waves of zombies become increasingly difficult to repel. Players earn sun points to plant more defensive plants by harvesting sunlight or other means, adding an element of resource management to the strategy.<br><br>'Plants vs. Zombies' received critical acclaim for its addictive gameplay, charming design, and strategic depth. It has spawned several sequels and spin-offs, including 'Plants vs. Zombies 2: It's About Time' and 'Plants vs. Zombies: Garden Warfare,' which introduced different genres while retaining the series' unique charm and humor.",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvsz.png",
@@ -58,7 +51,7 @@
         ],
         "chunksizeMB": 256,
         "diskGB": 2,
-        "ramMB": 2048,
+        "ramMB": 512,
         "type": "Strategy",
         "acpi": false
     },

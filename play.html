@@ -312,7 +312,7 @@
 
 
 
-        let statres;
+      
 
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -324,7 +324,7 @@
 
 
         const stater = await fetchWithProgress(stateurl, progressCallback)
-        statres = await stater.blob()
+        let statres = await stater.blob()
 
         console.log(drive)
 
@@ -412,9 +412,9 @@
           memory_size: ram * 1024 * 1024,
           screen_container: screen_container,
           autostart: false,
-          acpi: isacpi,
-          network_relay_url: "wss://relay.widgetry.org/", //ethernet
+          acpi: isacpi
         });
+        
         var filereader = new FileReader();
         filereader.onload = async function(e) {
           while (true) {
@@ -424,8 +424,8 @@
               statres = null
               break
             } catch(err) {
-              console.log("retrying!")
-              await delay(100)
+              console.log(err)
+              await delay(1000)
             }
           }
 
