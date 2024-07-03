@@ -28,6 +28,13 @@
         "iframe": "/g/slope.html"
     },
     {
+        "name": "Drive Mad",
+        "desc": "'Drive Mad' is a 3D driving game developed by Fancade, known for its vibrant graphics and challenging courses. The game offers a variety of unique levels where players must navigate through intricate tracks, performing stunts and overcoming obstacles. It emphasizes skillful driving and precise control, making it both entertaining and engaging for players who enjoy testing their driving prowess in a virtual environment. The game's intuitive controls and progressive difficulty ensure a rewarding experience for both casual gamers and driving enthusiasts alike.",
+        "icon": "https://cdn.glitch.global/a6fade6d-b5be-408b-b73e-a4d21ed56d19/5F084A0BCE06B710.jpg",
+        "type": "Racing",
+        "iframe": "/g/drivemad.html"
+    },
+    {
         "name": "Subway Surfers",
         "desc": "Subway Surfers is an endless runner mobile game co-developed by Kiloo and SYBO Games. It was released on May 24, 2012, and is available on various platforms including iOS, Android, and Windows Phone. In the game, players take on the role of teenage graffiti artists who run through subway tracks to escape from an inspector and his dog. Players must dodge trains and other obstacles while collecting coins and power-ups. The game is known for its colorful, vibrant graphics and frequent updates, which often feature new cities and themes. Subway Surfers has become one of the most downloaded mobile games, consistently maintaining its popularity over the years.",
         "icon": "https://cdn.glitch.global/0c98aa45-2ec4-4f77-8682-f4bf67f9f6fb/New%20Project.png?v=1719993034235",
