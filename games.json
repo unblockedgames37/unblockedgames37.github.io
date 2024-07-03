@@ -25,7 +25,7 @@
         "desc": "'Slope' is a captivating WebGL-based endless runner game where players control a 3D ball rolling down a dynamically shifting neon-colored slope. With simple yet challenging gameplay, the objective is to navigate through a maze of obstacles and pitfalls using precise arrow key controls or tilting mechanisms on mobile devices. The game's minimalist design features vibrant neon graphics and immersive sound effects, enhancing the experience of dodging blocks, ramps, and gaps that appear randomly as the slope descends endlessly. 'Slope' offers an addictive blend of reflex-based challenges and competitive gameplay, appealing to casual gamers seeking quick, engaging entertainment accessible on various web browsers and devices.",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/slopecd.png",
         "type": "Endless",
-        "iframe": "https://s3.amazonaws.com/production-assetsbucket-8ljvyr1xczmb/a6fade6d-b5be-408b-b73e-a4d21ed56d19/fesh9usdf.html"
+        "iframe": "/g/slope.html"
     },
     {
         "name": "Subway Surfers",
