@@ -75,30 +75,69 @@
             text-decoration: none;
             color: inherit;
         }
+        .centre {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
     </style>
 </head>
-<script>
-    if (localStorage.getItem("cloud")) {
-        fetch(`https://${localStorage.getItem("cloud")}.glitch.me/`)
-    }
-</script>
 <body>
     <nav>
         <a href="/">
-            <i class="material-icons">sports_esports</i>
+            <span>Home</span>
+        </a>
+        <a href="/?g=Racing">
+            <span>Racing</span>
+        </a>
+        <a href="/?g=Strategy">
+            <span>Strategy</span>
+        </a>
+        <a href="/?g=Endless">
+            <span>Endless</span>
+        </a>
+        <a href="/?g=Platformer">
+            <span>Platformer</span>
+        </a>
+        <a href="/?g=OS">
+            <span>OS</span>
         </a>
     </nav>
     <br>
+    <div class="centre">
+        <h1>UNBLOCKED GAMES</h1>
+        <p>Which games are unblocked?<br>Unblocked games are games which can be accessed on while on secure wifi networks by hosting the games on whitelisted sites</p>
+    </div>
     <center>
         <div id="gameslist"></div>
     </center>
+    <div class="centre" style="display: flex;align-items: center;justify-content: center;align-content: stretch;flex-wrap: wrap;flex-direction: row; background-color: #333;">
+        <div style="margin: 0 20px;">
+            <h2>About us</h2>
+            <p>Some internet connections block certain websites or have only whitelisted certain websites.<br> unblocked games 37 will never be blocked and should be whitelisted most of the time.<br> this will let gamers play games while on strict internet connections</p>
+        </div>
+        <div style="margin: 0 20px;">
+            <h2>DMCA</h2>
+            <p>If you would like to submit a DMCA request please email: 4zuca4@gmail.com</p>
+        </div>
+    </div>
+    
+    
+    
     
     <script>
     (async function(){
         const r = await fetch("games.json")
         const games = await r.json()
         let content = ""
+        const gen = window.location.search.split("?g=")[1]
         for (const i of games) {
+            if (gen) {
+                if (i["type"] != gen) {
+                continue
+            }
+            }
+
             content += `
 					<a href="/play.html?gamename=${encodeURIComponent(i["name"])}">
 						<div class="gameitem">

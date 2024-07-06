@@ -28,6 +28,20 @@
         "iframe": "/g/slope.html"
     },
     {
+        "name": "Short Life",
+        "desc": "'Short Life' by Tornado Studios is a unique and engaging game where players navigate a ragdoll character through various hazardous levels. The objective is to guide the character to the end of each level while avoiding numerous deadly traps and obstacles. The game's physics-based mechanics and dark humor make it both challenging and entertaining, as players must carefully time their movements to avoid being impaled, crushed, or otherwise harmed. With its simple controls and creative level design, 'Short Life' offers a fun and often humorous experience that keeps players coming back for more.",
+        "icon": "https://cdn.glitch.global/266c51d7-8fa0-473e-aabc-8bbc01617388/short-life.jpg",
+        "type": "Platformer",
+        "iframe": "/g/shortlife.html"
+    },
+    {
+        "name": "Flappy Bird",
+        "desc": "Flappy Bird is a mobile game created by Vietnamese developer Dong Nguyen and released by .GEARS Studios. The game features 2D retro-style graphics and a simple, yet challenging, gameplay mechanic where players control a bird by tapping the screen to make it fly between sets of pipes without hitting them. Despite its initial release in 2013, it gained massive popularity in early 2014, leading to both widespread acclaim and criticism for its addictive nature. Nguyen eventually removed the game from app stores, citing its overwhelming success and the stress it brought him.",
+        "icon": "https://cdn.glitch.global/266c51d7-8fa0-473e-aabc-8bbc01617388/3ndy9omydbr41.jpg",
+        "type": "Endless",
+        "iframe": "/g/flappybird.html"
+    },
+    {
         "name": "Drive Mad",
         "desc": "'Drive Mad' is a 3D driving game developed by Fancade, known for its vibrant graphics and challenging courses. The game offers a variety of unique levels where players must navigate through intricate tracks, performing stunts and overcoming obstacles. It emphasizes skillful driving and precise control, making it both entertaining and engaging for players who enjoy testing their driving prowess in a virtual environment. The game's intuitive controls and progressive difficulty ensure a rewarding experience for both casual gamers and driving enthusiasts alike.",
         "icon": "https://cdn.glitch.global/a6fade6d-b5be-408b-b73e-a4d21ed56d19/5F084A0BCE06B710.jpg",
