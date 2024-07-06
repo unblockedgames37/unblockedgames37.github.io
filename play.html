@@ -468,6 +468,18 @@
           }
         });
 
+        
+      window.drives = [];
+
+      for (const imgurl of drive) {
+        const thisimg = await fetch(imgurl);
+        const toblob = await thisimg.blob();
+        const blobUrl = URL.createObjectURL(toblob);
+        window.drives.push(blobUrl);
+        console.log("Preloaded chunk " + imgurl);
+      }
+      console.log("Entire drive has been preloaded");
+
        
 
       }

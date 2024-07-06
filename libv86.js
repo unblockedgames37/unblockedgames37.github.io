@@ -1319,6 +1319,9 @@
                 b.range.start -= chunkuse * window.chunksize * 1024 * 1024
             }
             document.getElementById("downloadtext").textContent = `Streaming ${b.range.length.toLocaleString()} bytes`
+            if (window.drives[chunkuse]) {
+                url = window.drives[chunkuse]
+            }
         }
         
         e.open(b.method || "get", url, !0);
