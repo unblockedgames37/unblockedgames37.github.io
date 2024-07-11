@@ -152,11 +152,6 @@
       }
     </style>
   </head>
-  <script>
-      if (localStorage.getItem("cloud")) {
-          fetch(`https://${localStorage.getItem("cloud")}.glitch.me/`)
-      }
-  </script>
   <body>
     <nav>
       <a href="/">
@@ -164,6 +159,12 @@
       </a>
       <a href="/?g=Racing">
           <span>Racing</span>
+      </a>
+      <a href="/?g=Shooter">
+          <span>Shooter</span>
+      </a>
+      <a href="/?g=Sandbox">
+        <span>Sandbox</span>
       </a>
       <a href="/?g=Strategy">
           <span>Strategy</span>
@@ -237,6 +238,11 @@
     </script>
 
     <script>
+      window.addEventListener("beforeunload", async function(event) {
+              event.preventDefault();
+      });
+
+
       function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
@@ -263,8 +269,10 @@
             
             continue
           }
+          let forward = `/play.html?gamename=${encodeURIComponent(i["name"])}`
+
           content += `
-					<a href="/play.html?gamename=${encodeURIComponent(i["name"])}">
+					<a href="${forward}">
 						<div class="gameitem">
 							<img width="200" height="240" src="${i["icon"]}">
 								<p class="gametitle">${i["name"]}</p>
@@ -340,19 +348,6 @@
           progressBar.value = (loaded / total)
         };
 
-
-
-      
-
-        function generateUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                const r = Math.random() * 16 | 0;
-                const v = c === 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-        }
-
-
         const stater = await fetchWithProgress(stateurl, progressCallback)
         let statres = await stater.blob()
 
@@ -363,12 +358,8 @@
         document.getElementById('fds').remove()
         window.chunksize = chunksize
 
-
-        let clientlastsave = 0
-
         let saving = false
         
-
         async function savegame() {
           const new_state = await emulator.save_state();
           var a = document.createElement("a");
@@ -376,10 +367,6 @@
           a.href = window.URL.createObjectURL(new Blob([new_state]));
           a.dataset.downloadurl = "application/octet-stream:" + a.download + ":" + a.href;
           a.click();
-          clientlastsave = new Date() + 5000
-
-          
-
           this.blur();
         }
 
@@ -410,15 +397,6 @@
 
               this.blur();
           };
-
-
-        window.addEventListener("beforeunload", async function(event) {
-            if (new Date() > clientlastsave) {
-              event.preventDefault(); //hasnt saved in last 5 seconds
-            }
-        });
-
-        
 
         document.getElementById("fixsound").style.display = ""
         document.addEventListener("click", async function() {
@@ -498,18 +476,13 @@
         iframe.src = url
         iframe.style.height = "100%"
         iframe.style.width = "100%"
-        iframe.style.border = "none";
 
-        iframe.addEventListener('load', function() {
-            const script = document.createElement('script');
-            script.textContent = `
-                window.open = function() {
-                    // Prevent window.open calls
-                    console.log("Opening new window is blocked.");
-                };
-            `;
-            iframe.contentDocument.head.appendChild(script);
-        });
+        iframe.marginWidth = "0"
+        iframe.marginHeight = "0"
+        iframe.frameBorder = "0"
+        iframe.scrolling = "no"
+        iframe.allow = "autoplay; fullscreen"
+        iframe.allowFullscreen = ""
 
         scr.appendChild(iframe)
         
@@ -517,5 +490,6 @@
 
 
     </script>
+
   </body>
 </html>

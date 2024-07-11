@@ -90,6 +90,12 @@
         <a href="/?g=Racing">
             <span>Racing</span>
         </a>
+        <a href="/?g=Shooter">
+            <span>Shooter</span>
+        </a>
+        <a href="/?g=Sandbox">
+          <span>Sandbox</span>
+        </a>
         <a href="/?g=Strategy">
             <span>Strategy</span>
         </a>
@@ -122,9 +128,6 @@
         </div>
     </div>
     
-    
-    
-    
     <script>
     (async function(){
         const r = await fetch("games.json")
@@ -138,8 +141,10 @@
             }
             }
 
+            let forward = `/play.html?gamename=${encodeURIComponent(i["name"])}`
+
             content += `
-					<a href="/play.html?gamename=${encodeURIComponent(i["name"])}">
+					<a href="${forward}">
 						<div class="gameitem">
 							<img width="200" height="240" src="${i["icon"]}">
 								<p class="gametitle">${i["name"]}</p>
@@ -149,6 +154,7 @@
         document.getElementById("gameslist").innerHTML = content
     })();
     </script>
+    
 
 
 </body>

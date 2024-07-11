@@ -28,6 +28,20 @@
         "iframe": "/g/slope.html"
     },
     {
+        "name": "Blockcraft",
+        "desc": "BlockCraft is a popular sandbox game that allows players to explore a block-based world, gather resources, and build various structures. With its intuitive controls and user-friendly interface, it is accessible to both new and experienced players. The game encourages creativity, offering a variety of building materials and tools to design intricate landscapes and impressive buildings. BlockCraft also features a vibrant community aspect, enabling players to share their creations and explore the works of others, fostering a collaborative and engaging environment. Its blend of exploration, resource management, and construction provides a captivating experience for sandbox game enthusiasts.",
+        "icon": "https://cdn.glitch.global/39633060-68f1-4ad2-8c47-4992d8269f48/Screenshot%202024-07-11%20211033.png",
+        "type": "Sandbox",
+        "iframe": "/g/blockcraft.html"
+    },
+    {
+        "name": "1v1.lol",
+        "desc": "1v1.lol is an online multiplayer third-person shooter game that focuses on 1v1 battles. It's popular for its fast-paced gameplay and building mechanics, similar to Fortnite. Players can build structures like walls and ramps for defense or tactical advantage. The game also features different modes such as Box Fight, Zone War, and Battle Royale, where players compete against each other to be the last one standing. It's available to play for free in web browsers and as a mobile app, making it accessible across different platforms.",
+        "icon": "https://cdn.glitch.global/027b3e7b-151a-487c-a0aa-e6f348e11b07/1v1.lol.png",
+        "type": "Shooter",
+        "iframe": "/g/1v1lol.html"
+    },
+    {
         "name": "Short Life",
         "desc": "'Short Life' by Tornado Studios is a unique and engaging game where players navigate a ragdoll character through various hazardous levels. The objective is to guide the character to the end of each level while avoiding numerous deadly traps and obstacles. The game's physics-based mechanics and dark humor make it both challenging and entertaining, as players must carefully time their movements to avoid being impaled, crushed, or otherwise harmed. With its simple controls and creative level design, 'Short Life' offers a fun and often humorous experience that keeps players coming back for more.",
         "icon": "https://cdn.glitch.global/266c51d7-8fa0-473e-aabc-8bbc01617388/short-life.jpg",
