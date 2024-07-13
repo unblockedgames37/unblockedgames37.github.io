@@ -44,6 +44,15 @@
             font-weight: bold;
             margin: 0 10px;
         }
+        #onlinecount {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 10px;
+            left: 10px;
+            position: absolute;
+        }
 
         #gameslist {
             display: flex;
@@ -154,6 +163,8 @@
   </head>
   <body>
     <nav>
+      <span id="onlinecount"></span>
+      <script src="/onlinecount.js"></script>
       <a href="/">
           <span>Home</span>
       </a>
