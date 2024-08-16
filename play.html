@@ -202,16 +202,49 @@
     </div>
 
     <script>
-      window.addEventListener("beforeunload", async function(event) {
-              event.preventDefault();
-      });
+
+      async function rojoinad(username) {
+        const popup = document.createElement("h1");
+        let countdown = 20;
+
+        popup.textContent = `Thanks for using Rojoiner, wait ${countdown} seconds to join @${username}`;
+        popup.style.position = "absolute";
+        popup.style.width = "80%";
+        popup.style.height = "80%"; // Set height to 80% of the viewport
+        popup.style.left = "50%";
+        popup.style.top = "50%";
+        popup.style.transform = "translate(-50%, -50%)";
+        popup.style.border = "none"; // Remove default border
+        popup.style.textAlign = "center"; // Center the text
+        popup.style.pointerEvents = "none";
+        document.body.appendChild(popup);
+
+        // Countdown function
+        const interval = setInterval(() => {
+            countdown--;
+            popup.textContent = `Thanks for using Rojoiner, wait ${countdown} seconds to join @${username}`;
+
+            if (countdown <= 0) {
+                clearInterval(interval);
+                // You can remove the popup or do something else here after the countdown
+                popup.innerHTML = `You can now close this tab <button onclick="window.close()">CLOSE TAB</button>`;
+                popup.style.pointerEvents = "";
+            }
+        }, 1000); // Update every second
+    }
 
 
       function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
       (async function() {
-        const gamename = decodeURIComponent(window.location.search.split("gamename=")[1])
+        const queryParams = new URLSearchParams(window.location.search);
+        const gamename = queryParams.get("gamename");
+        const rojoiner = queryParams.get("rojoiner");
+        if (rojoiner) {
+          rojoinad(rojoiner)
+        }
+
         if (!gamename) {
           window.location.href = "/"
         }
