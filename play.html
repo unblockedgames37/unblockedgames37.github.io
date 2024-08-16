@@ -20,8 +20,6 @@
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7578670734923466"
      crossorigin="anonymous"></script>
 
-    <script src="libv86.js"></script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -129,33 +127,6 @@
         background-color: #a5a5a5;
         cursor: not-allowed;
       }
-
-      :fullscreen canvas {
-        width: 100vw !important;
-        height: 100vh !important;
-      }
-      
-      :fullscreen nav {
-        display: none !important;
-      }
-
-      :fullscreen #screen_container {
-        width: 100vw !important;
-        height: 100vh !important;
-      }
-
-      :fullscreen #top {
-        display: none !important;
-      }
-      :fullscreen #bot {
-        display: none !important;
-      }
-      :fullscreen body {
-        overflow: hidden;
-      }
-      :fullscreen #footer {
-        display: none !important;
-      }
       #gamedesc {
         max-width: 800px;
       }
@@ -186,9 +157,6 @@
       <a href="/?g=Platformer">
           <span>Platformer</span>
       </a>
-      <a href="/?g=OS">
-          <span>OS</span>
-      </a>
   </nav>
     
 
@@ -214,7 +182,6 @@
         <div>
           <button class="btn" id="load"><i class="material-icons">upload_file</i></button>
           <button class="btn" id="save"><i class="material-icons">save</i></button>
-          <button class="btn" id="fullscreen"><i class="material-icons">fullscreen</i></button>
         </div>
 
       <h1 id="gametitle"></h1>
@@ -233,20 +200,6 @@
             <p>If you would like to submit a DMCA request please email: 4zuca4@gmail.com</p>
         </div>
     </div>
-
-    <script>
-      document.getElementById("fullscreen").onclick = async function() {
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-          document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-          document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) { // Internet Explorer/Edge
-          document.documentElement.msRequestFullscreen();
-        }
-      }
-    </script>
 
     <script>
       window.addEventListener("beforeunload", async function(event) {
@@ -270,14 +223,7 @@
             document.getElementById("gametitle").textContent = i["name"]
             document.getElementById("gamedesc").innerHTML = i["desc"]
             document.title = `Unblocked Games 37 - ${i["name"]}`
-
-            if (i["iframe"]) {
-              loadiframe(i["iframe"])
-            } else { //must be an emulator game
-              loadgame(i["state"], i["img"], i["name"], i["diskGB"], i["ramMB"], i["chunksizeMB"], i["acpi"])
-            }
-
-            
+            loadiframe(i["iframe"])
             continue
           }
           let forward = `/play.html?gamename=${encodeURIComponent(i["name"])}`
@@ -292,190 +238,6 @@
         }
         document.getElementById("gameslist").innerHTML = content
       })();
-      async function fetchWithProgress(url, progressCallback) {
-        const response = await fetch(url, {
-          cache: "force-cache"
-        });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const contentLength = response.headers.get('Content-Length');
-        if (!contentLength) throw new Error('Content-Length response header unavailable');
-        const total = parseInt(contentLength, 10);
-        let loaded = 0;
-        const reader = response.body.getReader();
-        const stream = new ReadableStream({
-          start(controller) {
-            function read() {
-              reader.read().then(({
-                done,
-                value
-              }) => {
-                if (done) {
-                  controller.close();
-                  return;
-                }
-                loaded += value.byteLength;
-                progressCallback(loaded, total);
-                controller.enqueue(value);
-                read();
-              }).catch(error => {
-                console.error(error);
-                controller.error(error);
-              });
-            }
-            read();
-          }
-        });
-        return new Response(stream);
-      }
-      async function loadgame(stateurl, drive, gamename, disk, ram, chunksize, isacpi) {
-
-
-        const screenContainer = document.getElementById('screen_container');
-        screenContainer.addEventListener('click', function() {
-          lockPointer();
-        });
-
-        function lockPointer() {
-          screenContainer.requestPointerLock().then(() => {
-            document.documentElement.style.pointerEvents = 'none';
-            document.addEventListener('pointerlockchange', pointerLockChange);
-          }).catch((err) => {
-            document.documentElement.style.pointerEvents = 'auto';
-          });
-        }
-
-        function pointerLockChange() {
-          if (document.pointerLockElement === screenContainer) {
-          } else {
-            document.documentElement.style.pointerEvents = 'auto';
-            document.removeEventListener('pointerlockchange', pointerLockChange);
-          }
-        }
-
-        const loadingtext = document.getElementById("loadingtxt")
-        const progressBar = document.getElementById("progressBar")
-        const progressCallback = (loaded, total) => {
-          loadingtext.textContent = `Loading ${gamename} [${((loaded / total) * 100).toFixed(2)}%]`;
-          progressBar.value = (loaded / total)
-        };
-
-        const stater = await fetchWithProgress(stateurl, progressCallback)
-        let statres = await stater.blob()
-
-        console.log(drive)
-
-        loadingtext.remove()
-        progressBar.remove()
-        document.getElementById('fds').remove()
-        window.chunksize = chunksize
-
-        let saving = false
-        
-        async function savegame() {
-          const new_state = await emulator.save_state();
-          var a = document.createElement("a");
-          a.download = gamename + "_save.ug37";
-          a.href = window.URL.createObjectURL(new Blob([new_state]));
-          a.dataset.downloadurl = "application/octet-stream:" + a.download + ":" + a.href;
-          a.click();
-          this.blur();
-        }
-
-
-        document.getElementById("save").onclick = savegame
-
-        document.getElementById("load").onclick = async function() {
-          document.getElementById("restore_file").click()
-        }
-
-        document.getElementById("restore_file").onchange = function()
-          {
-              if(this.files.length)
-              {
-                  var filereader = new FileReader();
-                  emulator.stop();
-
-                  filereader.onload = async function(e)
-                  {
-                      await emulator.restore_state(e.target.result);
-                      emulator.run();
-                  };
-
-                  filereader.readAsArrayBuffer(this.files[0]);
-
-                  this.value = "";
-              }
-
-              this.blur();
-          };
-
-        document.getElementById("fixsound").style.display = ""
-        document.addEventListener("click", async function() {
-          if (document.getElementById("fixsound")) {
-            document.getElementById("fixsound").remove()
-
-
-        const emulator = new V86({
-          wasm_path: "/v86.wasm",
-          bios: {
-            url: "/seabios.bin"
-          },
-          vga_bios: {
-            url: "/vgabios.bin"
-          },
-          hda: {
-            url: drive,
-            size: disk * 1024 * 1024 * 1024,
-            async: true
-          },
-          memory_size: ram * 1024 * 1024,
-          screen_container: screen_container,
-          autostart: false,
-          acpi: isacpi
-        });
-        
-        var filereader = new FileReader();
-        filereader.onload = async function(e) {
-          while (true) {
-            try {
-              await emulator.restore_state(e.target.result);
-              emulator.run();
-              statres = null
-              break
-            } catch(err) {
-              console.log(err)
-              await delay(1000)
-            }
-          }
-
-
-        };
-        await filereader.readAsArrayBuffer(statres);
-        window.emulator = emulator
-
-        document.getElementById("esc").onclick = async function() {
-            await emulator.keyboard_send_keys([27]);
-        };
-
-          }
-        });
-
-        
-      window.drives = [];
-
-      for (const imgurl of drive) {
-        const thisimg = await fetch(imgurl);
-        const toblob = await thisimg.blob();
-        const blobUrl = URL.createObjectURL(toblob);
-        window.drives.push(blobUrl);
-        console.log("Preloaded chunk " + imgurl);
-      }
-      console.log("Entire drive has been preloaded");
-
-       
-
-      }
-
 
       async function loadiframe(url) {
         document.getElementById("top").style.visibility = "hidden"
