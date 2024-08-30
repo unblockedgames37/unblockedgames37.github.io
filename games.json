@@ -1,5 +1,26 @@
 [
     {
+        "name": "Age Of Empires II",
+        "desc": "'Age of Empires II,' developed by Ensemble Studios and released in 1999 by Microsoft, is a critically acclaimed real-time strategy game that has stood the test of time. Set in the Middle Ages, it features thirteen playable civilizations, each with unique units and technologies. Players gather resources, build cities, and train armies to conquer opponents, both in single-player campaigns and multiplayer battles. Known for its deep strategic gameplay, historical accuracy, and engaging storylines, the game has seen numerous expansions and a definitive edition released in 2019, further enhancing its graphics and gameplay while introducing new content. Its enduring popularity is a testament to its influential role in the RTS genre.",
+        "icon": "https://cdn.glitch.global/8d99b0f8-3758-4a9b-9925-27d117c1b1f3/Age_of_Empires_II_-_The_Age_of_Kings_Coverart.png",
+        "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/aoe2sound.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_1.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_2.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_3.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_4.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_5.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_6.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_7.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/win98.img_8.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 2,
+        "ramMB": 512,
+        "type": "Strategy",
+        "acpi": false
+    },
+    {
         "name": "Slope",
         "desc": "'Slope' is a captivating WebGL-based endless runner game where players control a 3D ball rolling down a dynamically shifting neon-colored slope. With simple yet challenging gameplay, the objective is to navigate through a maze of obstacles and pitfalls using precise arrow key controls or tilting mechanisms on mobile devices. The game's minimalist design features vibrant neon graphics and immersive sound effects, enhancing the experience of dodging blocks, ramps, and gaps that appear randomly as the slope descends endlessly. 'Slope' offers an addictive blend of reflex-based challenges and competitive gameplay, appealing to casual gamers seeking quick, engaging entertainment accessible on various web browsers and devices.",
         "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/slopecd.png",
@@ -47,5 +68,76 @@
         "icon": "https://cdn.glitch.global/0c98aa45-2ec4-4f77-8682-f4bf67f9f6fb/New%20Project.png?v=1719993034235",
         "type": "Endless",
         "iframe": "/g/subway.html"
+    },
+    {
+        "name": "Plants Vs Zombies",
+        "desc": "'Plants vs. Zombies' is a tower defense and strategy video game developed and originally published by PopCap Games for Windows and Mac OS X in 2009. The game became immensely popular and has since been released on multiple platforms, including iOS, Android, and gaming consoles.<br><br>In 'Plants vs. Zombies,' players defend their homes from hordes of zombies by strategically placing a variety of plants with different offensive and defensive capabilities in their gardens. Each plant has unique abilities, such as shooting peas, freezing zombies, or exploding. The game features a humorous and light-hearted tone, with colorful graphics and quirky animations.<br><br>The gameplay involves planning defenses across multiple levels and game modes, including a story mode, mini-games, puzzles, and a survival mode where waves of zombies become increasingly difficult to repel. Players earn sun points to plant more defensive plants by harvesting sunlight or other means, adding an element of resource management to the strategy.<br><br>'Plants vs. Zombies' received critical acclaim for its addictive gameplay, charming design, and strategic depth. It has spawned several sequels and spin-offs, including 'Plants vs. Zombies 2: It's About Time' and 'Plants vs. Zombies: Garden Warfare,' which introduced different genres while retaining the series' unique charm and humor.",
+        "icon": "https://cdn.glitch.global/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvsz.png",
+        "state": "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/PLANTSVSZOMBIES.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_1.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_2.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_3.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_4.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_5.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_6.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_7.bin",
+            "https://cdn.glitch.me/7ef48d40-458f-4cec-8e53-da16e95c3f5c/plantsvszombie.img_8.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 2,
+        "ramMB": 512,
+        "type": "Strategy",
+        "acpi": false
+    },
+    {
+        "name": "Windows 2000",
+        "desc": "Windows 2000 is a significant release of the Microsoft Windows operating system family, following Windows NT 4.0 and preceding Windows XP. It was launched on February 17, 2000, after being released to manufacturing on December 15, 1999.",
+        "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/2kdisk.png",
+        "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windows2kSTATE.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/5b544901-6d9b-456b-abab-f54faae1404d/midtown2.img_1.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_2.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_3.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_4.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_5.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_6.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_7.bin",
+            "https://cdn.glitch.me/17ce26f6-f735-4795-a760-db8d4246cca8/midtown2.img_8.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 2,
+        "ramMB": 512,
+        "type": "OS",
+        "acpi": false
+    },
+    {
+        "name": "Windows XP",
+        "desc": "Windows XP is a widely acclaimed operating system developed by Microsoft and released on October 25, 2001. It marked a significant advancement in the Windows line, combining the consumer-friendly features of the Windows 9x series with the stability and performance improvements of the Windows NT platform.",
+        "icon": "https://cdn.glitch.global/19d744b9-8b76-4aa8-a434-5cc328470f88/xpdisk.png",
+        "state": "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/windowsxpstate.bin.zst",
+        "img": [
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_1.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_2.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_3.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_4.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_5.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_6.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_7.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_8.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_9.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_10.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_11.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_12.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_13.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_14.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_15.bin",
+            "https://cdn.glitch.me/19d744b9-8b76-4aa8-a434-5cc328470f88/winxp.img_16.bin"
+        ],
+        "chunksizeMB": 256,
+        "diskGB": 4,
+        "ramMB": 512,
+        "type": "OS",
+        "acpi": false
     }
 ]
